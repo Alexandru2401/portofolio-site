@@ -28,8 +28,12 @@ const socials = [
 export default function HeroSection() {
   return (
     <section id="hero" className="relative min-h-svh overflow-hidden">
-      <div className="pointer-events-none absolute inset-0">
-        <Lightfall />
+      <div className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]">
+        <Lightfall
+          backgroundColor="#2F293A"
+          backgroundGlow={1.5}
+          mouseInteraction={false}
+        />
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-svh w-[min(72rem,90%)] items-center">

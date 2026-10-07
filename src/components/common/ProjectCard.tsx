@@ -1,20 +1,27 @@
-import { Play, ArrowUpRight } from "lucide-react";
-import { FaReact, FaHtml5, FaCss3, FaNodeJs } from "react-icons/fa";
+import { Play } from "lucide-react";
+import { FaReact, FaHtml5, FaCss3, FaNodeJs, FaGithub } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
+import { SiNetlify } from "react-icons/si";
+
 import { BsTypescript } from "react-icons/bs";
 
 const technologies = [
-  { tech: "HTML", logo: <FaHtml5 /> },
-  { tech: "CSS", logo: <FaCss3 /> },
-  { tech: "React", logo: <FaReact /> },
-  { tech: "Tailwind CSS", logo: <RiTailwindCssFill /> },
-  { tech: "TypeScript", logo: <BsTypescript /> },
-  { tech: "Node.js", logo: <FaNodeJs /> },
+  { tech: "HTML", logo: <FaHtml5 />, color: "#E34F26" },
+  { tech: "CSS", logo: <FaCss3 />, color: "#1572B6" },
+  { tech: "React", logo: <FaReact />, color: "#61DAFB" },
+  { tech: "Tailwind CSS", logo: <RiTailwindCssFill />, color: "#38BDF8" },
+  { tech: "TypeScript", logo: <BsTypescript />, color: "#3178C6" },
+  { tech: "Node.js", logo: <FaNodeJs />, color: "#5FA04E" },
 ];
 
-export default function ProjectCard() {
+export default function ProjectCard({ index }: { index: number }) {
+  const alignLeft = index % 2 === 0;
   return (
-    <article className="group relative flex gap-6 rounded-2xl bg-[#2F293A] p-6 ring-1 ring-white/5 transition-all duration-300 hover:ring-white/15 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/40">
+    <article
+      className={`group relative flex w-4/5 gap-6 rounded-2xl bg-[#2F293A] p-6 ring-1 transition-all duration-300 hover:-translate-y-1 ${
+        alignLeft ? "self-start" : "self-end"
+      }`}
+    >
       {/* accent lateral care crește la hover */}
       <span className="absolute left-0 top-6 h-8 w-1 rounded-full bg-yellow-400/80 transition-all duration-300 group-hover:h-16" />
 
@@ -35,12 +42,12 @@ export default function ProjectCard() {
         </button>
 
         <ul className="flex flex-wrap gap-2">
-          {technologies.map(({ tech, logo }) => (
+          {technologies.map(({ tech, logo, color }) => (
             <li
               key={tech}
               className="flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-xs text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
-              <span className="text-sm" aria-hidden>
+              <span className="text-sm" style={{ color }} aria-hidden>
                 {logo}
               </span>
               {tech}
@@ -54,9 +61,21 @@ export default function ProjectCard() {
         <h3 className="text-xl font-semibold tracking-tight text-white">
           Nume proiect
         </h3>
+        <h4>Problema</h4>
         <p className="mt-2 text-sm leading-relaxed text-white/60">
           O scurtă descriere a proiectului — ce face și ce problemă rezolvă.
         </p>
+
+        <h4>Soluția</h4>
+        <p className="mt-2 text-sm leading-relaxed text-white/60">
+          O scurtă descriere a soluției implementate.
+        </p>
+        <a
+          href="#"
+          className="ml-auto rounded-lg bg-yellow-400 px-3.5 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300"
+        >
+          Detalii
+        </a>
 
         <div className="mt-auto flex items-center gap-1 pt-6">
           <a
@@ -65,7 +84,7 @@ export default function ProjectCard() {
             rel="noopener"
             className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/5 hover:text-white"
           >
-            Live <ArrowUpRight size={14} />
+            Live <SiNetlify />
           </a>
           <a
             href="#"
@@ -73,13 +92,7 @@ export default function ProjectCard() {
             rel="noopener"
             className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/5 hover:text-white"
           >
-            Cod <ArrowUpRight size={14} />
-          </a>
-          <a
-            href="#"
-            className="ml-auto rounded-lg bg-yellow-400 px-3.5 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300"
-          >
-            Detalii
+            Cod <FaGithub />
           </a>
         </div>
       </div>
