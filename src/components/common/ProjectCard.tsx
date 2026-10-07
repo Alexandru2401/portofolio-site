@@ -1,3 +1,4 @@
+import type { Ref } from "react";
 import { Play } from "lucide-react";
 import { FaReact, FaHtml5, FaCss3, FaNodeJs, FaGithub } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
@@ -14,17 +15,22 @@ const technologies = [
   { tech: "Node.js", logo: <FaNodeJs />, color: "#5FA04E" },
 ];
 
-export default function ProjectCard({ index }: { index: number }) {
+export default function ProjectCard({
+  index,
+  ref,
+}: {
+  index: number;
+  ref?: Ref<HTMLElement>;
+}) {
   const alignLeft = index % 2 === 0;
   return (
+    // data-active e pus de ProjectsSection când linia galbenă ajunge la card
     <article
-      className={`group relative flex w-4/5 gap-6 rounded-2xl bg-[#2F293A] p-6 ring-1 transition-all duration-300 hover:-translate-y-1 ${
-        alignLeft ? "self-start" : "self-end"
+      ref={ref}
+      className={`group relative flex w-4/5 gap-6 my-15 rounded-2xl bg-[#2F293A] p-6 ring-1 ring-white/10 saturate-50 transition-all duration-500 hover:-translate-y-1 data-active:scale-[1.02] data-active:opacity-100 data-active:shadow-[0_0_70px_-10px_rgb(250_204_21/0.55)] data-active:ring-yellow-400/80 data-active:saturate-100 motion-safe:data-active:animate-card-shake ${
+        alignLeft ? "self-start [--dir:-1]" : "self-end [--dir:1]"
       }`}
     >
-      {/* accent lateral care crește la hover */}
-      <span className="absolute left-0 top-6 h-8 w-1 rounded-full bg-yellow-400/80 transition-all duration-300 group-hover:h-16" />
-
       {/* stânga: media + stack */}
       <div className="flex flex-col gap-4 flex-1">
         <button
@@ -70,29 +76,34 @@ export default function ProjectCard({ index }: { index: number }) {
         <p className="mt-2 text-sm leading-relaxed text-white/60">
           O scurtă descriere a soluției implementate.
         </p>
-        <a
-          href="#"
-          className="ml-auto rounded-lg bg-yellow-400 px-3.5 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300"
-        >
-          Detalii
-        </a>
 
-        <div className="mt-auto flex items-center gap-1 pt-6">
+        <div className="mt-auto flex items-center gap-2 pt-6">
+          {/* Netlify: teal de brand cu text navy */}
           <a
             href="#"
             target="_blank"
             rel="noopener"
-            className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/5 hover:text-white"
+            className="flex items-center gap-2 rounded-lg bg-[#00C7B7] px-3.5 py-1.5 text-sm font-semibold text-[#0E1E25] transition-colors hover:bg-[#32E6E2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#32E6E2]"
           >
-            Live <SiNetlify />
+            <SiNetlify aria-hidden size={18} />
+            Live Demo
           </a>
+          {/* GitHub: butonul dark din UI-ul lor */}
           <a
             href="#"
             target="_blank"
             rel="noopener"
-            className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/5 hover:text-white"
+            className="flex items-center gap-2 rounded-lg border border-[#f0f6fc1a] bg-[#212830] px-3.5 py-1.5 text-sm font-semibold text-[#f0f6fc] transition-colors hover:border-[#3d444d] hover:bg-[#2a313c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f6feb]"
           >
-            Cod <FaGithub />
+            <FaGithub aria-hidden size={18} />
+            Cod Sursă
+          </a>
+
+          <a
+            href="#"
+            className="ml-auto rounded-lg bg-yellow-400 px-3.5 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300"
+          >
+            Detalii
           </a>
         </div>
       </div>
