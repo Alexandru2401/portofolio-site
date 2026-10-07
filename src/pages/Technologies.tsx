@@ -1,18 +1,28 @@
+import RailCheckpoint from "@/components/rail/RailCheckpoint";
+import RailPath from "@/components/rail/RailPath";
 import { stackLayers } from "@/data/technologies";
-import { useRailHits } from "@/hooks/useRailHits";
+import { LEFT_RAIL_X, railActive, type PathBuilder } from "@/lib/rail";
+
+// vine din mijloc, cotește spre stânga și rămâne pe stânga până jos
+const stackPath: PathBuilder = (w, h) => [
+  `M${w / 2} 0 V48 H${LEFT_RAIL_X} V${h}`,
+];
 
 export default function Technologies() {
-  const { railRef, setItemRef } = useRailHits(60);
-
   return (
-    <section className="mx-auto w-[min(72rem,90%)] pt-36 pb-40 text-white">
-      <header className="max-w-2xl">
-        <p className="flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/50">
-          <span className="size-1.5 rounded-full bg-yellow-400 shadow-[0_0_12px] shadow-yellow-400/70" />
-          Stack
-        </p>
+    <section
+      id="stack"
+      className="relative mx-auto w-[min(72rem,90%)] pt-36 pb-40 text-white"
+    >
+      <RailPath d={stackPath} className="top-0 left-0 size-full" />
+      <RailCheckpoint
+        href="#stack"
+        label="Stack"
+        className="absolute top-20 left-0"
+      />
 
-        <h1 className="mt-5 text-[clamp(2.75rem,7vw,5.5rem)] font-semibold leading-[0.9] tracking-tighter">
+      <header className="max-w-2xl pl-12 md:pl-16">
+        <h1 className="text-[clamp(2.75rem,7vw,5.5rem)] font-semibold leading-[0.9] tracking-tighter">
           Cu ce
           <span
             className="block text-transparent"
@@ -30,21 +40,12 @@ export default function Technologies() {
       </header>
 
       <div className="relative mt-24">
-        {/* aceeași linie ca la proiecte, la marginea stângă */}
-        <div
-          ref={railRef}
-          aria-hidden
-          className="absolute top-0 left-[7px] h-full w-px bg-white/10"
-        >
-          <div className="rail-fill h-full w-full bg-yellow-400" />
-        </div>
-
         <ol className="flex flex-col gap-28">
           {stackLayers.map((layer, i) => (
-            // data-active e pus de useRailHits când linia ajunge la strat
+            // data-active e pus de railActive când bara ajunge la strat
             <li
               key={layer.title}
-              ref={setItemRef(i)}
+              ref={railActive(60)}
               className="group relative grid gap-8 pl-12 md:grid-cols-[15rem_1fr] md:pl-16"
             >
               {/* nodul de pe linie */}

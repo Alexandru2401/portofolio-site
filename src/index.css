@@ -129,20 +129,27 @@
   }
 }
 
-@keyframes fill-rail {
-  from {
-    transform: scaleY(0);
-  }
-  to {
-    transform: scaleY(1);
+/* click pe un checkpoint de pe bară duce lin la secțiune */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-.rail-fill {
-  transform-origin: top;
-  animation: fill-rail linear both;
-  animation-timeline: view();
-  animation-range: cover 0% cover 100%;
+/* undă care pornește din checkpoint când bara ajunge la el */
+@theme {
+  --animate-checkpoint-ping: checkpoint-ping 700ms ease-out;
+
+  @keyframes checkpoint-ping {
+    from {
+      scale: 1;
+      opacity: 0.9;
+    }
+    to {
+      scale: 1.6;
+      opacity: 0;
+    }
+  }
 }
 
 /* shake când linia galbenă intră în card; --dir împinge cardul departe de linie */

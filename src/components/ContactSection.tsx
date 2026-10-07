@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { ArrowUp, ArrowUpRight, Check, Copy } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import RailCheckpoint from "./rail/RailCheckpoint";
+import RailPath from "./rail/RailPath";
+import { LEFT_RAIL_X, type PathBuilder } from "@/lib/rail";
 
 // TODO: pune adresa de email și profilul de LinkedIn reale
 const EMAIL = "salut@exemplu.ro";
@@ -8,6 +11,11 @@ const EMAIL = "salut@exemplu.ro";
 const socials = [
   { href: "https://github.com/Alexandru2401", label: "GitHub", icon: FaGithub },
   { href: "https://linkedin.com/in/...", label: "LinkedIn", icon: FaLinkedin },
+];
+
+// bara pleacă de pe stânga (de la Stack) și se întoarce la mijloc, unde se termină
+const contactPath: PathBuilder = (w, h) => [
+  `M${LEFT_RAIL_X} 0 V40 H${w / 2} V${h}`,
 ];
 
 export default function ContactSection() {
@@ -36,7 +44,7 @@ export default function ContactSection() {
   return (
     <footer
       id="contact"
-      className="relative overflow-hidden border-t border-white/10 pt-32 text-white"
+      className="relative overflow-hidden border-t border-white/10 text-white"
     >
       {/* glow galben care „răsare” de sub marginea paginii */}
       <div
@@ -44,7 +52,14 @@ export default function ContactSection() {
         className="pointer-events-none absolute -bottom-64 left-1/2 size-[40rem] -translate-x-1/2 rounded-full bg-yellow-400/15 blur-3xl"
       />
 
-      <div className="relative mx-auto w-[min(72rem,90%)]">
+      <div className="relative mx-auto w-[min(72rem,90%)] pt-44">
+        <RailPath d={contactPath} className="top-0 left-0 h-24 w-full" />
+        <RailCheckpoint
+          href="#contact"
+          label="Contact"
+          className="absolute top-24 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
+
         <p className="flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/50">
           <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px] shadow-emerald-400/70" />
           Disponibil pentru remote
