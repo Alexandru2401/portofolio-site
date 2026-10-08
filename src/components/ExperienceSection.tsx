@@ -25,7 +25,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative mx-auto w-[min(72rem,90%)] pt-36 pb-24 text-white"
+      className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] pt-36 pb-24 text-white"
     >
       <RailPath d={experiencePath} className="top-0 left-0 size-full" />
       <RailCheckpoint
@@ -34,7 +34,7 @@ export default function ExperienceSection() {
         className="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2"
       />
 
-      <header className="max-w-5xl pl-12 md:pl-16">
+      <header className="max-w-5xl pl-8 md:pl-16">
         <h2 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center font-semibold leading-[0.9] tracking-tighter">
           Experiență în câmpul muncii
         </h2>
@@ -51,7 +51,7 @@ export default function ExperienceSection() {
           <li
             key={`${job.company}-${job.period}`}
             ref={railActive(60)}
-            className="group relative grid gap-6 pl-12 md:grid-cols-[15rem_1fr] md:gap-8 md:pl-16"
+            className="group relative grid gap-6 pl-8 md:grid-cols-[15rem_1fr] md:gap-8 md:pl-16"
           >
             {/* nodul de pe linie */}
             <span

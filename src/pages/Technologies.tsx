@@ -10,7 +10,7 @@ export default function Technologies() {
   return (
     <section
       id="stack"
-      className="relative mx-auto w-[min(72rem,90%)] pt-36 pb-40 text-white"
+      className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] pt-36 pb-10 md:pb-40 text-white"
     >
       <RailPath d={stackPath} className="top-0 left-0 size-full" />
       <RailCheckpoint
@@ -19,7 +19,7 @@ export default function Technologies() {
         className="absolute top-20 -left-10"
       />
 
-      <header className="max-w-5xl pl-12 md:pl-16">
+      <header className="max-w-5xl pl-8 md:pl-16">
         <h1 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center  font-semibold leading-[0.9] tracking-tighter">
           Tehnologiile folosite
         </h1>
@@ -38,7 +38,7 @@ export default function Technologies() {
             <li
               key={layer.title}
               ref={railActive(60)}
-              className="group relative grid gap-8 pl-12 md:grid-cols-[15rem_1fr] md:pl-16"
+              className="group relative grid gap-8 pl-8 md:grid-cols-[15rem_1fr] md:pl-16"
             >
               {/* nodul de pe linie */}
               <span

@@ -32,7 +32,7 @@ export default function ContactSection() {
       id="contact"
       className="relative overflow-hidden border-t border-white/10 text-white"
     >
-      <div className="relative mx-auto w-[min(72rem,90%)] pt-44 pb-28">
+      <div className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] pt-44 pb-28">
         <RailPath d={contactPath} className="top-0 left-0 h-24 w-full" />
         <RailCheckpoint
           href="#contact"

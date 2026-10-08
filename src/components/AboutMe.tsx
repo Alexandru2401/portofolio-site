@@ -230,7 +230,7 @@ export default function AboutMe() {
         </div>
       </div>
 
-      <div className="relative h-32">
+      <div className="h-14 relative md:h-32">
         <RailPath d={verticalPath} className="top-0 left-1/2 h-full w-px -translate-x-1/2" />
       </div>
     </section>
