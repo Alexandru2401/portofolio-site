@@ -115,7 +115,7 @@ export default function AboutMe() {
           De la idee până în producție
         </h2>
 
-        <div className="mt-8 grid items-center gap-8 md:grid-cols-[1fr_1.05fr]">
+        <div className="mt-8 grid items-center gap-8 md:grid-cols-[1fr_1.05fr] [&>*]:min-w-0">
           {/* Cards */}
           <div>
             <ol className="flex flex-col gap-3">

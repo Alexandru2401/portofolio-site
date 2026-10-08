@@ -30,7 +30,6 @@ const linkClass = (isActive: boolean) =>
     isActive && "bg-white/15 text-white",
   );
 
-// secțiunea aflată acum în mijlocul ecranului
 function useActiveSection() {
   const { pathname } = useLocation();
   const [active, setActive] = useState<string | null>(null);
@@ -64,11 +63,11 @@ export default function Navbar() {
   const active = useActiveSection();
 
   return (
-    <header className="fixed inset-x-0 top-4 z-50 mx-auto w-[min(64rem,92%)]">
+    <header className="fixed inset-x-0 top-0 z-50 mx-auto w-full md:top-4 md:w-[min(64rem,92%)]">
       <nav
         className={twMerge(
-          "border border-white/15 bg-[#1A1622]/80 shadow-lg shadow-black/30 backdrop-blur-xl backdrop-saturate-150",
-          open ? "rounded-3xl" : "rounded-full",
+          "border-b border-white/15 bg-[#1A1622]/80 shadow-lg shadow-black/30 backdrop-blur-xl backdrop-saturate-150 md:border",
+          open ? "md:rounded-3xl" : "md:rounded-full",
         )}
       >
         <div className="flex items-center justify-between py-2 pr-2 pl-5">
@@ -80,46 +79,53 @@ export default function Navbar() {
             Alex
           </Link>
 
-          <ul className="hidden items-center gap-1 lg:flex">
-            {links.map(({ id, label }) => (
-              <li key={id}>
-                <Link
-                  to={`/#${id}`}
-                  aria-current={active === id ? "true" : undefined}
-                  className={linkClass(active === id)}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
-            <li className="ml-2">
-              <a
-                href={LINKEDIN_URL}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-                className={twMerge(linkedinClass, "size-9")}
-              >
-                <FaLinkedin aria-hidden size={18} />
-              </a>
-            </li>
-            <li>
-              <a href={CV_URL} download className={cvClass}>
-                <Download aria-hidden size={16} />
-                Descarcă CV
-              </a>
-            </li>
-          </ul>
+          <div className="flex items-center gap-1">
+            <ul className="mr-2 hidden items-center gap-1 lg:flex">
+              {links.map(({ id, label }) => (
+                <li key={id}>
+                  <Link
+                    to={`/#${id}`}
+                    aria-current={active === id ? "true" : undefined}
+                    className={linkClass(active === id)}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Meniu"
-            aria-expanded={open}
-            className="rounded-full p-2 text-white/80 hover:bg-white/10 lg:hidden"
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className={twMerge(linkedinClass, "size-9")}
+            >
+              <FaLinkedin aria-hidden size={18} />
+            </a>
+            <a
+              href={CV_URL}
+              download
+              aria-label="Descarcă CV"
+              className={twMerge(
+                cvClass,
+                "size-9 justify-center p-0 md:size-auto md:px-4 md:py-2",
+              )}
+            >
+              <Download aria-hidden size={16} />
+              <span className="hidden md:inline">Descarcă CV</span>
+            </a>
+
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Meniu"
+              aria-expanded={open}
+              className="ml-1 grid size-9 place-items-center rounded-full text-white/80 hover:bg-white/10 lg:hidden"
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
 
         {open && (
@@ -136,29 +142,6 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-            <li className="mt-1">
-              <a
-                href={LINKEDIN_URL}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => setOpen(false)}
-                className={twMerge(linkedinClass, "px-4 py-2")}
-              >
-                <FaLinkedin aria-hidden size={16} />
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a
-                href={CV_URL}
-                download
-                onClick={() => setOpen(false)}
-                className={twMerge(cvClass, "justify-center")}
-              >
-                <Download aria-hidden size={16} />
-                Descarcă CV
-              </a>
-            </li>
           </ul>
         )}
       </nav>

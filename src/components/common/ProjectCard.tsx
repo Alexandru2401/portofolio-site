@@ -18,7 +18,7 @@ export default function ProjectCard({
     // data-active e pus de ProjectsSection când linia galbenă ajunge la card
     <article
       ref={ref}
-      className={`group relative flex w-4/5 gap-6 my-2 rounded-2xl bg-[#2F293A] p-6 ring-1 ring-white/10 saturate-50 transition-all duration-500 hover:-translate-y-1 data-active:scale-[1.02] data-active:opacity-100 data-active:shadow-[0_0_70px_-10px_rgb(250_204_21/0.55)] data-active:ring-yellow-400/80 data-active:saturate-100 motion-safe:data-active:animate-card-shake ${
+      className={`group relative flex w-full flex-col gap-6 my-2 md:w-4/5 md:flex-row rounded-2xl bg-[#2F293A] p-6 ring-1 ring-white/10 saturate-50 transition-all duration-500 hover:-translate-y-1 data-active:scale-[1.02] data-active:opacity-100 data-active:shadow-[0_0_70px_-10px_rgb(250_204_21/0.55)] data-active:ring-yellow-400/80 data-active:saturate-100 motion-safe:data-active:animate-card-shake ${
         alignLeft ? "self-start [--dir:-1]" : "self-end [--dir:1]"
       }`}
     >
@@ -66,7 +66,7 @@ export default function ProjectCard({
           {project.solution}
         </p>
 
-        <div className="mt-auto flex items-center gap-2 pt-6">
+        <div className="mt-auto flex flex-wrap items-center gap-2 pt-6">
           <ProjectLinks project={project} />
 
           <Link

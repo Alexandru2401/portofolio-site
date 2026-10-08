@@ -44,7 +44,7 @@ export default function HeroSection() {
             <h1 className="mt-5 text-[clamp(1.75rem,5vw,4.5rem)] font-semibold leading-[0.9] tracking-tight text-white">
               Alex DEV
               <span
-                className="mt-2 block whitespace-nowrap text-5xl text-white/80 tracking-tight"
+                className="mt-2 block whitespace-nowrap text-[clamp(1.5rem,8vw,3rem)] text-white/80 tracking-tight"
               >
                 Fullstack developer
               </span>
