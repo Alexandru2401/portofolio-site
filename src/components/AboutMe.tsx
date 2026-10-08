@@ -129,7 +129,7 @@ export default function AboutMe() {
                   </span>
                   <div>
                     <h3 className="font-medium">{title}</h3>
-                    <p className="mt-1 text-sm text-pretty text-white/50">
+                    <p className="mt-1 text-sm text-pretty text-white/70">
                       {text}
                     </p>
                   </div>

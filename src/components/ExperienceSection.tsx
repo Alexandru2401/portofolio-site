@@ -1,13 +1,25 @@
+import { BriefcaseBusiness, CalendarDays, Code, MapPin } from "lucide-react";
 import RailCheckpoint from "./rail/RailCheckpoint";
 import RailPath from "./rail/RailPath";
 import { jobs } from "@/data/experience";
 import { LEFT_RAIL_X, railActive, type PathBuilder } from "@/lib/rail";
 
-// vine din mijloc (de la Despre mine), cotește spre stânga și coboară pe stânga
-// până la Stack, care o preia de acolo
+// centrul checkpoint-ului (top-20) și locul unde bara cotește, sub el
+const CHECKPOINT_Y = 40;
+const TURN_Y = CHECKPOINT_Y + 40;
+
+// vine din mijloc (de la Despre mine), trece prin checkpoint, abia apoi cotește
+// spre stânga și coboară pe stânga până la Stack, care o preia de acolo
 const experiencePath: PathBuilder = (w, h) => [
-  `M${w / 2} 0 V48 H${LEFT_RAIL_X} V${h}`,
+  `M${w / 2} 0 V${TURN_Y} H${LEFT_RAIL_X} V${h}`,
 ];
+
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word[0]?.toUpperCase())
+    .join("");
 
 export default function ExperienceSection() {
   return (
@@ -19,27 +31,21 @@ export default function ExperienceSection() {
       <RailCheckpoint
         href="#experience"
         label="Experiență"
-        className="absolute top-20 left-0"
+        className="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2"
       />
 
-      <header className="max-w-2xl pl-12 md:pl-16">
-        <h2 className="text-[clamp(2.75rem,7vw,5.5rem)] font-semibold leading-[0.9] tracking-tighter">
-          Unde am
-          <span
-            className="block text-transparent"
-            style={{ WebkitTextStroke: "1px rgba(255,255,255,0.55)" }}
-          >
-            lucrat
-          </span>
+      <header className="max-w-5xl pl-12 md:pl-16">
+        <h2 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center font-semibold leading-[0.9] tracking-tighter">
+          Experiență în câmpul muncii
         </h2>
 
-        <p className="mt-6 max-w-md text-pretty text-white/60">
+        <p className="mt-6 text-pretty text-center text-white/80">
           Echipele și produsele la care am contribuit, de la cel mai recent în
           jos.
         </p>
       </header>
 
-      <ol className="mt-24 flex flex-col gap-20">
+      <ol className="mt-16 flex flex-col gap-20">
         {jobs.map((job) => (
           // data-active e pus de railActive când bara ajunge la job
           <li
@@ -54,17 +60,47 @@ export default function ExperienceSection() {
             />
 
             <div className="transition-opacity duration-500 not-group-data-active:opacity-40">
-              <span className="text-xs font-medium tracking-[0.25em] text-yellow-400 uppercase tabular-nums">
+              <p className="flex items-center gap-2 text-xs font-medium tracking-[0.25em] text-yellow-400 uppercase tabular-nums">
+                <CalendarDays aria-hidden size={14} className="shrink-0" />
                 {job.period}
-              </span>
-              <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                {job.company}
-              </h3>
-              <p className="mt-1 text-sm text-white/50">{job.location}</p>
+              </p>
+              <div className="mt-3 flex items-center gap-3">
+                {/* pătrat alb ca o iconiță de aplicație — logo-urile au text
+                    închis la culoare; colorat doar când bara ajunge la job */}
+                <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-white p-1.5 ring-1 ring-white/10 grayscale transition-all duration-500 group-data-active:grayscale-0 group-data-active:shadow-[0_0_24px_-4px_rgb(250_204_21/0.5)]">
+                  {job.logo ? (
+                    <img
+                      src={job.logo}
+                      alt=""
+                      className="size-full object-contain"
+                    />
+                  ) : (
+                    <span
+                      aria-hidden
+                      className="text-sm font-semibold text-[#1A1622]"
+                    >
+                      {initials(job.company)}
+                    </span>
+                  )}
+                </span>
+                <h3 className="text-2xl font-semibold tracking-tight">
+                  {job.company}
+                </h3>
+              </div>
+              <p className="mt-2 flex items-center gap-2 text-sm text-white/50">
+                <MapPin aria-hidden size={14} className="shrink-0" />
+                {job.location}
+              </p>
             </div>
 
-            <article className="rounded-xl bg-[#2F293A] p-6 ring-1 ring-white/10 transition-all duration-300 hover:ring-yellow-400/70 hover:shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)]">
-              <h4 className="text-lg font-medium">{job.role}</h4>
+            {/* se aprinde ca un card de proiect când bara ajunge la job (fără shake) */}
+            <article className="rounded-xl bg-[#2F293A] p-6 ring-1 ring-white/10 saturate-50 transition-all duration-500 hover:ring-yellow-400/70 hover:shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)] group-data-active:scale-[1.02] group-data-active:shadow-[0_0_70px_-10px_rgb(250_204_21/0.55)] group-data-active:ring-yellow-400/80 group-data-active:saturate-100">
+              <h4 className="flex items-center gap-2.5 text-lg font-medium">
+                <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-white/5 text-yellow-400 ring-1 ring-white/10">
+                  <BriefcaseBusiness aria-hidden size={16} />
+                </span>
+                {job.role}
+              </h4>
               <p className="mt-2 text-sm text-pretty text-white/60">
                 {job.description}
               </p>
@@ -81,7 +117,13 @@ export default function ExperienceSection() {
                 ))}
               </ul>
 
-              <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tehnologii">
+              <ul
+                className="mt-5 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4"
+                aria-label="Tehnologii"
+              >
+                <li aria-hidden className="text-white/40">
+                  <Code size={16} />
+                </li>
                 {job.tech.map((tech) => (
                   <li
                     key={tech}

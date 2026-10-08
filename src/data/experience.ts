@@ -1,6 +1,11 @@
+import antenaLogo from "@/assets/antena_group_logo.webp";
+import fidemLogo from "@/assets/fidem_logo.png";
+
 export interface Job {
   role: string;
   company: string;
+  /** opțional — fără logo apar inițialele firmei */
+  logo?: string;
   period: string;
   location: string;
   description: string;
@@ -12,9 +17,10 @@ export interface Job {
 export const jobs: Job[] = [
   {
     role: "Fullstack Developer",
-    company: "Numele companiei",
-    period: "2023 — prezent",
-    location: "Remote",
+    company: "Fidem",
+    logo: fidemLogo,
+    period: "Sep. 2025 — prezent",
+    location: "București, România",
     description:
       "O frază despre ce face compania și care e rolul tău în echipă.",
     highlights: [
@@ -24,10 +30,11 @@ export const jobs: Job[] = [
     tech: ["React", "TypeScript", "Node.js"],
   },
   {
-    role: "Frontend Developer",
-    company: "Numele companiei",
-    period: "2021 — 2023",
-    location: "București, RO",
+    role: "Network Admin",
+    company: "Antena Group",
+    logo: antenaLogo,
+    period: " Feb. 2025 — Sep. 2025",
+    location: "București, România",
     description:
       "O frază despre ce face compania și care e rolul tău în echipă.",
     highlights: [
