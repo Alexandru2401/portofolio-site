@@ -1,24 +1,15 @@
 import type { Ref } from "react";
-import { Play } from "lucide-react";
-import { FaReact, FaHtml5, FaCss3, FaNodeJs, FaGithub } from "react-icons/fa";
-import { RiTailwindCssFill } from "react-icons/ri";
-import { SiNetlify } from "react-icons/si";
-
-import { BsTypescript } from "react-icons/bs";
-
-const technologies = [
-  { tech: "HTML", logo: <FaHtml5 />, color: "#E34F26" },
-  { tech: "CSS", logo: <FaCss3 />, color: "#1572B6" },
-  { tech: "React", logo: <FaReact />, color: "#61DAFB" },
-  { tech: "Tailwind CSS", logo: <RiTailwindCssFill />, color: "#38BDF8" },
-  { tech: "TypeScript", logo: <BsTypescript />, color: "#3178C6" },
-  { tech: "Node.js", logo: <FaNodeJs />, color: "#5FA04E" },
-];
+import { Link } from "react-router";
+import { ArrowRight, Play } from "lucide-react";
+import type { Project } from "@/data/projects";
+import ProjectLinks from "./ProjectLinks";
 
 export default function ProjectCard({
+  project,
   index,
   ref,
 }: {
+  project: Project;
   index: number;
   ref?: Ref<HTMLElement>;
 }) {
@@ -48,15 +39,13 @@ export default function ProjectCard({
         </button>
 
         <ul className="flex flex-wrap gap-2">
-          {technologies.map(({ tech, logo, color }) => (
+          {project.tech.map(({ name, icon: Icon, color }) => (
             <li
-              key={tech}
+              key={name}
               className="flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-xs text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
-              <span className="text-sm" style={{ color }} aria-hidden>
-                {logo}
-              </span>
-              {tech}
+              <Icon aria-hidden className="text-sm" style={{ color }} />
+              {name}
             </li>
           ))}
         </ul>
@@ -65,46 +54,33 @@ export default function ProjectCard({
       {/* dreapta: text + acțiuni */}
       <div className="flex flex-1 flex-col">
         <h3 className="text-xl font-semibold tracking-tight text-white">
-          Nume proiect
+          {project.name}
         </h3>
         <h4>Problema</h4>
         <p className="mt-2 text-sm leading-relaxed text-white/60">
-          O scurtă descriere a proiectului — ce face și ce problemă rezolvă.
+          {project.problem}
         </p>
 
         <h4>Soluția</h4>
         <p className="mt-2 text-sm leading-relaxed text-white/60">
-          O scurtă descriere a soluției implementate.
+          {project.solution}
         </p>
 
         <div className="mt-auto flex items-center gap-2 pt-6">
-          {/* Netlify: teal de brand cu text navy */}
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener"
-            className="flex items-center gap-2 rounded-lg bg-[#00C7B7] px-3.5 py-1.5 text-sm font-semibold text-[#0E1E25] transition-colors hover:bg-[#32E6E2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#32E6E2]"
-          >
-            <SiNetlify aria-hidden size={18} />
-            Live Demo
-          </a>
-          {/* GitHub: butonul dark din UI-ul lor */}
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener"
-            className="flex items-center gap-2 rounded-lg border border-[#f0f6fc1a] bg-[#212830] px-3.5 py-1.5 text-sm font-semibold text-[#f0f6fc] transition-colors hover:border-[#3d444d] hover:bg-[#2a313c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f6feb]"
-          >
-            <FaGithub aria-hidden size={18} />
-            Cod Sursă
-          </a>
+          <ProjectLinks project={project} />
 
-          <a
-            href="#"
-            className="ml-auto rounded-lg bg-yellow-400 px-3.5 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300"
+          <Link
+            to={`/proiecte/${project.id}`}
+            aria-label={`Detalii despre ${project.name}`}
+            className="group/details ml-auto flex items-center gap-1.5 rounded-lg bg-yellow-400 px-3.5 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
           >
             Detalii
-          </a>
+            <ArrowRight
+              aria-hidden
+              size={14}
+              className="transition-transform motion-safe:group-hover/details:translate-x-0.5"
+            />
+          </Link>
         </div>
       </div>
     </article>

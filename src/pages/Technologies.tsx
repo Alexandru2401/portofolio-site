@@ -3,10 +3,8 @@ import RailPath from "@/components/rail/RailPath";
 import { stackLayers } from "@/data/technologies";
 import { LEFT_RAIL_X, railActive, type PathBuilder } from "@/lib/rail";
 
-// vine din mijloc, cotește spre stânga și rămâne pe stânga până jos
-const stackPath: PathBuilder = (w, h) => [
-  `M${w / 2} 0 V48 H${LEFT_RAIL_X} V${h}`,
-];
+// bara vine deja pe stânga (de la Experiență) și rămâne acolo până jos
+const stackPath: PathBuilder = (_w, h) => [`M${LEFT_RAIL_X} 0 V${h}`];
 
 export default function Technologies() {
   return (

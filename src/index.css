@@ -126,6 +126,8 @@
   }
   html {
     @apply font-sans;
+    /* navbar-ul e fix — secțiunile nu ajung sub el la click pe un link */
+    scroll-padding-top: 6rem;
   }
 }
 

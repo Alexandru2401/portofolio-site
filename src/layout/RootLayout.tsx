@@ -1,5 +1,5 @@
 import Navbar from "@/layout/Navbar";
-import { Outlet } from "react-router";
+import { Outlet, ScrollRestoration } from "react-router";
 
 export default function RootLayout() {
   return (
@@ -17,6 +17,8 @@ export default function RootLayout() {
 >
   <Outlet />
 </main>
+      {/* pagină nouă → sus; „/#projects” → la secțiune */}
+      <ScrollRestoration />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import ProjectCard from "./common/ProjectCard";
 import RailCheckpoint from "./rail/RailCheckpoint";
 import RailPath from "./rail/RailPath";
+import { projects } from "@/data/projects";
 import { railActive, verticalPath } from "@/lib/rail";
 
 const HIT_OFFSET = 15;
@@ -18,9 +19,14 @@ export default function ProjectsSection() {
 
       <RailCheckpoint href="#projects" label="Proiecte" className="self-center" />
 
-      {[...new Array(3)].map((_, i) => (
+      {projects.map((project, i) => (
         // data-active e pus de railActive când bara ajunge la card
-        <ProjectCard key={i} index={i} ref={railActive(HIT_OFFSET)} />
+        <ProjectCard
+          key={project.id}
+          project={project}
+          index={i}
+          ref={railActive(HIT_OFFSET)}
+        />
       ))}
     </section>
   );
