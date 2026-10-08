@@ -1,29 +1,20 @@
 import Lightfall from "@/components/common/Lightfall";
-import { ArrowUpRight } from "lucide-react";
-import avatar from "@/assets/avatar.jpeg";
+import { ArrowRight, ArrowUpRight, LayoutGrid } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+import avatar from "../../public/avatar.svg";
 
 const socials = [
   {
-    href: "https://github.com/...",
+    href: "https://github.com/Alexandru2401",
     label: "GitHub",
-    icon: (
-      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <title>GitHub</title>
-        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-      </svg>
-    ),
-  },
-  {
-    href: "https://linkedin.com/in/...",
-    label: "LinkedIn",
-    icon: (
-      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <title>GitHub</title>
-        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-      </svg>
-    ),
+    icon: FaGithub,
+    // culorile oficiale GitHub
+    className: "border-white/15 bg-[#24292F] hover:bg-[#32383F]",
   },
 ];
+
+// TODO: pune datele reale
+const LOCATION = "București, RO";
 
 export default function HeroSection() {
   return (
@@ -36,60 +27,77 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-svh w-[min(72rem,90%)] items-center">
-        <div className="grid w-full rounded-full items-center gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-0">
-          {/* stânga — poza, topită în background */}
-          <figure className="relative aspect-3/4 w-full rounded-full max-w-sm justify-self-center md:justify-self-start">
-            <img
-              src={avatar}
-              alt="Alex"
-              className="h-full w-full rounded-full object-cover contrast-125"
-            />
-            <div className="absolute inset-0 rounded-full ring-1 ring-white/15" />
-          </figure>
-
-          {/* dreapta — textul, care calcă peste poză */}
-          <div className="md:-ml-16">
-            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/50">
+      <div className="relative z-10 mx-auto flex min-h-svh w-[min(64rem,90%)] items-center pb-16">
+        <div className="grid w-full items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
+          {/* stânga — textul; umbra îl desparte de liniile albe din Lightfall */}
+          <div className="[text-shadow:0_0_24px_rgb(47_41_58/0.9),0_2px_6px_rgb(0_0_0/0.5)]">
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs uppercase tracking-wider text-white">
               <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px] shadow-emerald-400/70" />
-              Disponibil pentru remote
+              Disponibil pentru proiecte
+              <span >·</span>
+              {LOCATION}
+              <span>·</span>
+              Remote
             </p>
 
-            <h1 className="mt-5 text-[clamp(2.75rem,7vw,5.5rem)] font-semibold leading-[0.9] tracking-tighter text-white">
-              Fullstack
+            <h1 className="mt-5 text-[clamp(1.75rem,5vw,4.5rem)] font-semibold leading-[0.9] tracking-tight text-white">
+              Alex DEV
               <span
-                className="block text-transparent"
-                style={{ WebkitTextStroke: "1px rgba(255,255,255,0.55)" }}
+                className="mt-2 block whitespace-nowrap text-5xl text-white/80 tracking-tight"
               >
-                developer
+                Fullstack developer
               </span>
             </h1>
 
             <p className="mt-6 max-w-md text-pretty text-white/60">
-              Construiesc produse complete în React și TypeScript — de la un CRM
-              de call center la un catalog de produse cu dashboard de
-              administrare. Design, frontend, API, deploy.
+              Dezvolt aplicații web scalabile, de la arhitectura backend până la interfața finală. Lucrez cu TypeScript, React, Next.js și Node.js, cu accent pe cod ușor de întreținut și performanță.
             </p>
 
-            <div className="mt-8 flex gap-3">
-              {socials.map(({ href, label, icon }) => (
+
+
+            <ul className="mt-8 flex flex-wrap gap-3">
+              <li>
                 <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur-md transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+                  href="#projects"
+                  className="group flex items-center gap-2 rounded-full border border-transparent bg-yellow-400 p-2 px-4 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
                 >
-                  {icon}
-                  {label}
-                  <ArrowUpRight
+                  <LayoutGrid aria-hidden size={18} />
+                  Vezi proiectele
+                  <ArrowRight
                     size={14}
-                    className="opacity-50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    className="opacity-60 transition-transform group-hover:translate-x-0.5"
                   />
                 </a>
+              </li>
+              {socials.map(({ href, label, icon: Icon, className }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`group flex items-center gap-2 rounded-full border p-2 px-4 text-sm font-medium text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60 ${className}`}
+                  >
+                    <Icon aria-hidden size={18} />
+                    {label}
+                    <ArrowUpRight
+                      size={14}
+                      className="opacity-50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    />
+                  </a>
+                </li>
               ))}
-            </div>
+
+            </ul>
           </div>
+
+          {/* dreapta — poza, cu partea de jos topită în fundal */}
+          <figure className="relative w-full max-w-xs justify-self-center lg:justify-self-end">
+            <img
+              src={avatar}
+              alt="Alex"
+              className="relative w-full drop-shadow-[0_24px_40px_rgb(0_0_0/0.45)] mask-[linear-gradient(to_bottom,black_70%,transparent)]"
+            />
+          </figure>
         </div>
       </div>
     </section>
