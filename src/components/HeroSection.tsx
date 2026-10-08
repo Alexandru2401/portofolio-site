@@ -18,8 +18,8 @@ const LOCATION = "București, RO";
 
 export default function HeroSection() {
   return (
-    <section id="hero" className="relative min-h-svh overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]">
+    <section id="hero" className="relative max-h-[90dvh] overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent)]">
         <Lightfall
           backgroundColor="#2F293A"
           backgroundGlow={0.1}
@@ -29,7 +29,7 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-svh w-[min(64rem,90%)] items-center pb-16">
-        <div className="grid w-full items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
+        <div className="grid w-full gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
           {/* stânga — textul; umbra îl desparte de liniile albe din Lightfall */}
           <div className="[text-shadow:0_0_24px_rgb(47_41_58/0.9),0_2px_6px_rgb(0_0_0/0.5)]">
             <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs uppercase tracking-wider text-white">
