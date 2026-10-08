@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router";
 import { Download, Menu, X } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
+import { CV_URL } from "@/data/links";
 
 // în ordinea secțiunilor din pages/Home.tsx
 const links = [
@@ -13,8 +14,6 @@ const links = [
   { id: "contact", label: "Contact" },
 ];
 
-// TODO: pune CV-ul în public/cv.pdf
-const CV_URL = "/cv.pdf";
 // TODO: pune profilul real
 const LINKEDIN_URL = "https://linkedin.com/in/...";
 

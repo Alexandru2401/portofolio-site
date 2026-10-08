@@ -1,22 +1,24 @@
 import type { ReactNode } from "react";
+import { ArrowRight, Download } from "lucide-react";
 import RailCheckpoint from "./rail/RailCheckpoint";
 import RailPath from "./rail/RailPath";
+import { CV_URL } from "@/data/links";
 import { verticalPath, type PathBuilder } from "@/lib/rail";
 
 // TODO: completează cu detalii personale (de unde ești, ce faci în afara codului)
 const principles = [
   {
     title: "Încep de la problemă",
-    text: "Întâi înțeleg cine folosește aplicația și ce îl încurcă. Abia apoi aleg tehnologia.",
+    text: "Înțeleg problema, userul final și constrângerile. Apoi aleg soluția potrivită.",
   },
   {
-    title: "Livrez cap-coadă",
-    text: "Design, frontend, API, deploy — pot duce o funcționalitate singur până în producție.",
+    title: "Livrez complet",
+    text: "Frontend — Backend — Deploy. Pot duce o funcționalitate singur până în producție.",
   },
   {
-    title: "Scriu cod care se citește",
-    text: "Tipuri clare, componente mici, nume bune. Următorul developer o să-mi mulțumească.",
-  },
+    title: "Scriu cod pentru oameni",
+    text: "Tipuri clare, componente mici, nume bune și o structură ușor de înțeles și întreținut.",
+  }
 ];
 
 // cele două ramuri ale bifurcării: pornesc din mijlocul marginii de sus,
@@ -86,6 +88,13 @@ const codeLines: ReactNode[] = [
   </>,
 ];
 
+// TODO: actualizează ce lucrezi acum
+const status = [
+  "disponibil pentru roluri remote",
+  "UTC+3 · răspund în 24h",
+  "acum: backend pe un CRM în producție",
+];
+
 export default function AboutMe() {
   return (
     <section id="about-me" className="text-white">
@@ -94,7 +103,7 @@ export default function AboutMe() {
       </div>
 
       {/* aici bara se bifurcă și înconjoară secțiunea ca un border */}
-      <div className="relative mx-auto w-[min(76rem,94%)] px-6 pt-20 pb-16 md:px-12">
+      <div className="relative mx-auto w-[min(76rem,94%)] px-6 pt-16 pb-16 md:px-12 md:pb-36">
         <RailPath d={borderPaths} className="top-0 left-0 size-full" />
         <RailCheckpoint
           href="#about-me"
@@ -102,31 +111,18 @@ export default function AboutMe() {
           className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
         />
 
-        <div className="grid items-center gap-16 md:grid-cols-[1fr_1.05fr]">
-          {/* stânga — povestea și principiile */}
+        <h2 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center font-semibold leading-[0.9] tracking-tighter text-balance lg:whitespace-nowrap">
+          De la idee până în producție
+        </h2>
+
+        <div className="mt-8 grid items-center gap-8 md:grid-cols-[1fr_1.05fr]">
+          {/* Cards */}
           <div>
-            <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-semibold leading-[0.9] tracking-tighter">
-              Construiesc
-              <span
-                className="block text-transparent"
-                style={{ WebkitTextStroke: "1px rgba(255,255,255,0.55)" }}
-              >
-                cap-coadă
-              </span>
-            </h2>
-
-            <p className="mt-6 max-w-md text-pretty text-white/60">
-              Sunt Alex, developer fullstack. Îmi place să duc un produs de la o
-              idee schițată până la ceva ce oamenii folosesc în fiecare zi — cum
-              a fost CRM-ul pentru call center sau catalogul de produse cu panou
-              de administrare.
-            </p>
-
-            <ol className="mt-10 flex flex-col gap-3">
+            <ol className="flex flex-col gap-3">
               {principles.map(({ title, text }, i) => (
                 <li
                   key={title}
-                  className="group flex gap-4 rounded-xl p-4 ring-1 ring-white/10 transition-all duration-300 hover:bg-[#2F293A] hover:ring-yellow-400/60"
+                  className="group flex gap-4 rounded-xl p-4 ring-1 bg-[#1a1622] ring-white/10 transition-all duration-300 hover:bg-[#2F293A] hover:ring-yellow-400/60"
                 >
                   <span className="pt-0.5 text-xs font-medium tracking-[0.25em] text-yellow-400 tabular-nums">
                     {String(i + 1).padStart(2, "0")}
@@ -142,7 +138,7 @@ export default function AboutMe() {
             </ol>
           </div>
 
-          {/* dreapta — același profil, scris ca obiect TypeScript */}
+          {/* Code editor - ts */}
           <div className="relative">
             <div
               aria-hidden
@@ -179,6 +175,56 @@ export default function AboutMe() {
                   ))}
                 </code>
               </pre>
+            </figure>
+
+            {/* terminal */}
+            <figure className="relative mt-4 overflow-hidden rounded-xl bg-[#0D0B12]/95 font-mono text-[13px] ring-1 ring-white/15 shadow-2xl shadow-black/60 backdrop-blur-md md:absolute md:-right-10 md:-bottom-26 md:mt-0 md:w-[23rem]">
+              <div className="flex items-center gap-3 border-b border-white/10 bg-[#2F293A] px-3 py-2">
+                <div aria-hidden className="flex gap-1.5">
+                  <span className="size-2.5 rounded-full bg-white/15" />
+                  <span className="size-2.5 rounded-full bg-white/15" />
+                  <span className="size-2.5 rounded-full bg-emerald-400" />
+                </div>
+                <figcaption className="text-xs text-white/50">terminal</figcaption>
+              </div>
+
+              <div className="p-4">
+                <p className="text-white/85">
+                  <span className="text-yellow-400">$</span> npm run status
+                </p>
+                <ul className="mt-2 flex flex-col gap-1">
+                  {status.map((line) => (
+                    <li key={line} className="flex gap-2 text-white/70">
+                      <span aria-hidden className="text-emerald-400">
+                        ✔
+                      </span>
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-4 flex flex-wrap gap-2 font-sans">
+                  <a
+                    href="#contact"
+                    className="group flex items-center gap-1.5 rounded-lg bg-yellow-400 px-3 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
+                  >
+                    Hai să vorbim
+                    <ArrowRight
+                      aria-hidden
+                      size={14}
+                      className="transition-transform motion-safe:group-hover:translate-x-0.5"
+                    />
+                  </a>
+                  <a
+                    href={CV_URL}
+                    download
+                    className="flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/8 px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+                  >
+                    <Download aria-hidden size={14} />
+                    Descarcă CV
+                  </a>
+                </div>
+              </div>
             </figure>
           </div>
         </div>

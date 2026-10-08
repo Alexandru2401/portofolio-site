@@ -22,8 +22,9 @@ export default function HeroSection() {
       <div className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]">
         <Lightfall
           backgroundColor="#2F293A"
-          backgroundGlow={1.5}
+          backgroundGlow={0.1}
           mouseInteraction={false}
+          dpr={0.5}
         />
       </div>
 

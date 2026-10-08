@@ -193,11 +193,19 @@ void main() {
 }
 `;
 
+// în afara componentei: un array nou la fiecare render ar reporni efectul WebGL
+const DEFAULT_COLORS = ["#A6C8FF", "#5227FF", "#FF9FFC"];
+
+// shaderul face ~117 pași de raymarch pe pixel — pe ecrane HiDPI asta înseamnă
+// de 2–4× mai mulți pixeli, deci rezoluția e limitată, iar cadrele la 30/s
+const MAX_DPR = 1;
+const FRAME_MS = 1000 / 30;
+
 const Lightfall: React.FC<LightfallProps> = ({
   className,
   dpr,
   paused = false,
-  colors = ["#A6C8FF", "#5227FF", "#FF9FFC"],
+  colors = DEFAULT_COLORS,
   backgroundColor = "#0A29FF",
   speed = 0.5,
   streakCount = 2,
@@ -228,13 +236,19 @@ const Lightfall: React.FC<LightfallProps> = ({
     const container = containerRef.current;
     if (!container) return;
 
-    const renderer = new Renderer({
-      dpr:
-        dpr ??
-        (typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1),
-      alpha: true,
-      antialias: true,
-    });
+    // dacă browserul nu poate crea un context WebGL, rămâne doar fundalul
+    let renderer: Renderer;
+    try {
+      renderer = new Renderer({
+        dpr: dpr ?? Math.min(window.devicePixelRatio || 1, MAX_DPR),
+        alpha: true,
+        // un singur triunghi pe tot ecranul — antialiasing-ul doar costă
+        antialias: false,
+      });
+    } catch (e) {
+      console.warn("Lightfall: WebGL indisponibil", e);
+      return;
+    }
     rendererRef.current = renderer;
     const gl = renderer.gl;
     const canvas = gl.canvas as HTMLCanvasElement;
@@ -288,6 +302,11 @@ const Lightfall: React.FC<LightfallProps> = ({
     const mesh = new Mesh(gl, { geometry, program });
     meshRef.current = mesh;
 
+    // cu reduced motion — un singur cadru static, redesenat doar la resize
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
     const resize = () => {
       const rect = container.getBoundingClientRect();
       renderer.setSize(rect.width, rect.height);
@@ -296,8 +315,10 @@ const Lightfall: React.FC<LightfallProps> = ({
         gl.drawingBufferHeight,
         1,
       ];
+      if (reduceMotion) renderer.render({ scene: mesh });
     };
 
+    if (reduceMotion) uniforms.iTime.value = 10;
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(container);
@@ -316,8 +337,14 @@ const Lightfall: React.FC<LightfallProps> = ({
       canvas.addEventListener("pointermove", onPointerMove);
     }
 
+    // desenează doar cât timp e pe ecran
+    let visible = true;
+    let lastFrame = 0;
+
     const loop = (t: number) => {
       rafRef.current = requestAnimationFrame(loop);
+      if (!visible || t - lastFrame < FRAME_MS) return;
+      lastFrame = t;
       uniforms.iTime.value = t * 0.001;
       if (mouseDampening > 0) {
         if (!lastTimeRef.current) lastTimeRef.current = t;
@@ -341,10 +368,18 @@ const Lightfall: React.FC<LightfallProps> = ({
         }
       }
     };
-    rafRef.current = requestAnimationFrame(loop);
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+    });
+
+    if (!reduceMotion) {
+      io.observe(container);
+      rafRef.current = requestAnimationFrame(loop);
+    }
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      io.disconnect();
       if (mouseInteraction)
         canvas.removeEventListener("pointermove", onPointerMove);
       ro.disconnect();
@@ -360,7 +395,9 @@ const Lightfall: React.FC<LightfallProps> = ({
       callIfFn(programRef.current, "remove");
       callIfFn(geometryRef.current, "remove");
       callIfFn(meshRef.current, "remove");
-      callIfFn(rendererRef.current, "destroy");
+      // OGL nu are renderer.destroy() — fără asta contextul WebGL rămâne
+      // ocupat, iar după ~16 montări browserul refuză să mai creeze altul
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
       programRef.current = null;
       geometryRef.current = null;
       meshRef.current = null;
