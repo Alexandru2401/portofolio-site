@@ -1,22 +1,23 @@
 import type { IconType } from "react-icons";
+import { FaTheaterMasks } from "react-icons/fa";
 import {
-  SiCss,
-  SiEslint,
   SiExpress,
-  SiFigma,
   SiGit,
-  SiGithub,
-  SiHtml5,
-  SiJavascript,
+  SiGithubactions,
   SiNetlify,
+  SiNextdotjs,
   SiNodedotjs,
+  SiPostgresql,
   SiReact,
-  SiReactrouter,
+  SiRender,
   SiShadcnui,
+  SiSupabase,
   SiTailwindcss,
+  SiTestinglibrary,
   SiTypescript,
+  SiVercel,
   SiVite,
-  SiWebgl,
+  SiVitest,
 } from "react-icons/si";
 
 export interface Tech {
@@ -32,47 +33,55 @@ export interface StackLayer {
   tech: Tech[];
 }
 
-// TODO: verifică lista — Figma și Express sunt presupuneri, restul apar în proiect
+// lista vine din tehnologies.md
 export const stackLayers: StackLayer[] = [
   {
-    title: "Design & interfață",
-    description: "Cum arată și cum se simte: layout, stil, componente.",
+    title: "Frontend",
+    description: "Interfața: componente, stil și logica din browser.",
     tech: [
-      { name: "Figma", role: "Machete și prototipuri", icon: SiFigma, color: "#F24E1E" },
-      { name: "HTML", role: "Structură semantică", icon: SiHtml5, color: "#E34F26" },
-      { name: "CSS", role: "Layout și animații", icon: SiCss, color: "#663399" },
+      { name: "TypeScript", role: "Tipuri, mai puține bug-uri", icon: SiTypescript, color: "#3178C6" },
+      { name: "React", role: "Interfețe din componente", icon: SiReact, color: "#61DAFB" },
+      { name: "Next.js", role: "Rendering pe server și rutare", icon: SiNextdotjs, color: "#FFFFFF" },
       { name: "Tailwind CSS", role: "Stil direct în markup", icon: SiTailwindcss, color: "#38BDF8" },
       { name: "shadcn/ui", role: "Componente accesibile", icon: SiShadcnui, color: "#FFFFFF" },
     ],
   },
   {
-    title: "Frontend",
-    description: "Logica din browser: stare, rutare, interacțiuni.",
-    tech: [
-      { name: "JavaScript", role: "Limbajul de bază", icon: SiJavascript, color: "#F7DF1E" },
-      { name: "TypeScript", role: "Tipuri, mai puține bug-uri", icon: SiTypescript, color: "#3178C6" },
-      { name: "React", role: "Interfețe din componente", icon: SiReact, color: "#61DAFB" },
-      { name: "React Router", role: "Navigare între pagini", icon: SiReactrouter, color: "#CA4245" },
-      { name: "WebGL", role: "Efecte vizuale pe GPU", icon: SiWebgl, color: "#E44D26" },
-    ],
-  },
-  {
-    title: "API & server",
-    description: "Datele din spatele interfeței și regulile care le păzesc.",
+    title: "Backend",
+    description: "API-urile din spatele interfeței și regulile care le păzesc.",
     tech: [
       { name: "Node.js", role: "JavaScript pe server", icon: SiNodedotjs, color: "#5FA04E" },
       { name: "Express", role: "Rute și API-uri REST", icon: SiExpress, color: "#FFFFFF" },
     ],
   },
   {
-    title: "Livrare & unelte",
+    title: "Database",
+    description: "Unde stau datele și cum ajung în siguranță la aplicație.",
+    tech: [
+      { name: "PostgreSQL", role: "Bază de date relațională", icon: SiPostgresql, color: "#4169E1" },
+      { name: "Supabase", role: "Postgres, auth și storage", icon: SiSupabase, color: "#3FCF8E" },
+    ],
+  },
+  {
+    title: "Testing",
+    description: "Siguranța că o schimbare nouă nu strică ce mergea deja.",
+    tech: [
+      { name: "Vitest", role: "Teste unitare rapide", icon: SiVitest, color: "#6E9F18" },
+      { name: "React Testing Library", role: "Componente testate ca un user", icon: SiTestinglibrary, color: "#E33332" },
+      // react-icons nu are logo Playwright — măștile sunt chiar simbolul lor
+      { name: "Playwright", role: "Teste end-to-end în browser", icon: FaTheaterMasks, color: "#2EAD33" },
+    ],
+  },
+  {
+    title: "Livrare",
     description: "Tot ce duce codul de pe laptop până la utilizator.",
     tech: [
       { name: "Git", role: "Istoric și ramuri", icon: SiGit, color: "#F05032" },
-      { name: "GitHub", role: "Cod, review, colaborare", icon: SiGithub, color: "#FFFFFF" },
+      { name: "GitHub Actions", role: "Teste și deploy automat", icon: SiGithubactions, color: "#2088FF" },
       { name: "Vite", role: "Dev server și build", icon: SiVite, color: "#9135FF" },
-      { name: "ESLint", role: "Cod curat, constant", icon: SiEslint, color: "#7C6CF0" },
+      { name: "Vercel", role: "Deploy pentru Next.js", icon: SiVercel, color: "#FFFFFF" },
       { name: "Netlify", role: "Deploy la fiecare push", icon: SiNetlify, color: "#00C7B7" },
+      { name: "Render", role: "Hosting pentru API-uri", icon: SiRender, color: "#FFFFFF" },
     ],
   },
 ];

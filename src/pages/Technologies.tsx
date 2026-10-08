@@ -16,21 +16,15 @@ export default function Technologies() {
       <RailCheckpoint
         href="#stack"
         label="Stack"
-        className="absolute top-20 left-0"
+        className="absolute top-20 -left-10"
       />
 
-      <header className="max-w-2xl pl-12 md:pl-16">
-        <h1 className="text-[clamp(2.75rem,7vw,5.5rem)] font-semibold leading-[0.9] tracking-tighter">
-          Cu ce
-          <span
-            className="block text-transparent"
-            style={{ WebkitTextStroke: "1px rgba(255,255,255,0.55)" }}
-          >
-            construiesc
-          </span>
+      <header className="max-w-5xl pl-12 md:pl-16">
+        <h1 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center  font-semibold leading-[0.9] tracking-tighter">
+          Tehnologiile folosite
         </h1>
 
-        <p className="mt-6 max-w-md text-pretty text-white/60">
+        <p className="mt-6 text-center text-pretty text-white/60">
           Un produs complet are straturi: design, frontend, API, deploy. Mai jos
           sunt uneltele pe care le folosesc pentru fiecare — derulează și
           urmărește cum se aprinde stack-ul.
@@ -38,7 +32,7 @@ export default function Technologies() {
       </header>
 
       <div className="relative mt-24">
-        <ol className="flex flex-col gap-28">
+        <ol className="flex flex-col gap-8">
           {stackLayers.map((layer, i) => (
             // data-active e pus de railActive când bara ajunge la strat
             <li
@@ -52,12 +46,12 @@ export default function Technologies() {
                 className="absolute top-1 left-0 size-[15px] rounded-full border-2 border-white/20 bg-[#0D0B12] transition-all duration-500 group-data-active:border-yellow-400 group-data-active:bg-yellow-400 group-data-active:shadow-[0_0_16px_2px_rgb(250_204_21/0.6)]"
               />
 
-              <div className="transition-opacity duration-500 not-group-data-active:opacity-40">
-                <span className="text-xs font-medium tracking-[0.25em] text-yellow-400 tabular-nums">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+              <div className="transition-opacity duration-500 not-group-data-active:opacity-70">
+
                 <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                  {layer.title}
+                  <span className="text-xs font-medium tracking-[0.25em] text-yellow-400 tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>   {layer.title}
                 </h2>
                 <p className="mt-2 text-sm text-pretty text-white/60">
                   {layer.description}
@@ -66,9 +60,10 @@ export default function Technologies() {
 
               <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {layer.tech.map(({ name, role, icon: Icon, color }, j) => (
+                  // galben doar în stratul curent; cele trecute revin la normal
                   <li
                     key={name}
-                    className="relative overflow-hidden rounded-xl bg-[#2F293A] p-4 ring-1 ring-white/10 transition-all duration-300 hover:ring-yellow-400/70 hover:shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)] motion-safe:hover:-translate-y-1"
+                    className="relative overflow-hidden rounded-md bg-[#2F293A] p-3 ring-1 ring-white/10 transition-all duration-300 hover:ring-yellow-400/70 hover:shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)] motion-safe:hover:-translate-y-1 group-current:ring-yellow-400/70 group-current:shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)]"
                   >
                     {/* lumină în culoarea brandului, aprinsă odată cu stratul */}
                     <span
@@ -77,15 +72,15 @@ export default function Technologies() {
                       style={{ background: color, transitionDelay: `${j * 70}ms` }}
                     />
 
-                    <Icon
-                      aria-hidden
-                      className="relative size-7 opacity-40 grayscale transition-all duration-500 group-data-active:opacity-100 group-data-active:grayscale-0"
-                      style={{ color, transitionDelay: `${j * 70}ms` }}
-                    />
-                    <h3 className="relative mt-4 font-medium">{name}</h3>
-                    <p className="relative mt-1 text-sm text-white/50">
-                      {role}
-                    </p>
+                    <div className="relative flex items-center gap-2.5">
+                      <Icon
+                        aria-hidden
+                        className="size-7 shrink-0 opacity-70 grayscale transition-all duration-500 group-data-active:opacity-100 group-data-active:grayscale-0"
+                        style={{ color, transitionDelay: `${j * 70}ms` }}
+                      />
+                      <h3 className="font-medium">{name}</h3>
+                    </div>
+                    <p className="relative mt-2 text-sm text-white/50">{role}</p>
                   </li>
                 ))}
               </ul>

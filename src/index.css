@@ -4,6 +4,8 @@
 @import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
+/* stratul curent din Tehnologii: activ (bara a ajuns la el), dar următorul nu */
+@custom-variant group-current (&:is(:where(.group)[data-active]:not(:has(+ [data-active])) *));
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -164,19 +166,19 @@
       transform: translateX(0);
     }
     12% {
-      transform: translateX(calc(14px * var(--dir, 1)));
+      transform: translateX(calc(5px * var(--dir, 1)));
     }
     28% {
-      transform: translateX(calc(-9px * var(--dir, 1)));
-    }
-    44% {
-      transform: translateX(calc(6px * var(--dir, 1)));
-    }
-    62% {
       transform: translateX(calc(-3px * var(--dir, 1)));
     }
+    44% {
+      transform: translateX(calc(2px * var(--dir, 1)));
+    }
+    62% {
+      transform: translateX(calc(-1px * var(--dir, 1)));
+    }
     80% {
-      transform: translateX(calc(1px * var(--dir, 1)));
+      transform: translateX(calc(0.5px * var(--dir, 1)));
     }
   }
 }
