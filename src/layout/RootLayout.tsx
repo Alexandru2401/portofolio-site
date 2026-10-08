@@ -1,4 +1,6 @@
+import Footer from "@/layout/Footer";
 import Navbar from "@/layout/Navbar";
+import ScrollToTopButton from "@/layout/ScrollToTopButton";
 import { Outlet, ScrollRestoration } from "react-router";
 
 export default function RootLayout() {
@@ -17,6 +19,8 @@ export default function RootLayout() {
 >
   <Outlet />
 </main>
+      <Footer />
+      <ScrollToTopButton />
       {/* pagină nouă → sus; „/#projects” → la secțiune */}
       <ScrollRestoration />
     </>
