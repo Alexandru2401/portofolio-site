@@ -14,13 +14,25 @@ const TIP_RATIO = 0.5;
 /** x-ul barei când merge pe stânga (Stack → Contact): centrul nodurilor de 15px. */
 export const LEFT_RAIL_X = 7.5;
 
+/** x-ul barei când merge pe dreapta (pe mobil, Stack → Contact). */
+export const rightRailX = (w: number) => w - LEFT_RAIL_X;
+
+/** Sub breakpoint-ul `md` din Tailwind (48rem) bara are alt traseu. */
+export const isMobileRail = () =>
+  window.matchMedia("(width < 48rem)").matches;
+
 const listeners = new Set<Listener>();
 let raf = 0;
 let ro: ResizeObserver | null = null;
 
 const run = () => {
   raf = 0;
-  const tip = window.innerHeight * TIP_RATIO;
+  const vh = window.innerHeight;
+  // aproape de capătul paginii vârful coboară spre marginea de jos, ca bara să
+  // ajungă la final chiar dacă ultima secțiune e mai scurtă de jumătate de ecran
+  const remaining =
+    document.documentElement.scrollHeight - (window.scrollY + vh);
+  const tip = Math.max(vh * TIP_RATIO, vh - Math.max(remaining, 0));
   for (const listener of listeners) listener(tip);
 };
 

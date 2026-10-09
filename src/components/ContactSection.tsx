@@ -2,7 +2,12 @@ import { ArrowUpRight } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import RailCheckpoint from "./rail/RailCheckpoint";
 import RailPath from "./rail/RailPath";
-import { LEFT_RAIL_X, type PathBuilder } from "@/lib/rail";
+import {
+  isMobileRail,
+  LEFT_RAIL_X,
+  rightRailX,
+  type PathBuilder,
+} from "@/lib/rail";
 
 
 // aceleași butoane ca în hero, în culorile oficiale
@@ -21,9 +26,10 @@ const socials = [
   },
 ];
 
-// bara pleacă de pe stânga (de la Stack) și se întoarce la mijloc, unde se termină
+// bara pleacă de pe stânga (de la Stack; pe mobil de pe dreapta) și se
+// întoarce la mijloc, unde se termină
 const contactPath: PathBuilder = (w, h) => [
-  `M${LEFT_RAIL_X} 0 V40 H${w / 2} V${h}`,
+  `M${isMobileRail() ? rightRailX(w) : LEFT_RAIL_X} 0 V40 H${w / 2} V${h}`,
 ];
 
 export default function ContactSection() {
@@ -32,7 +38,7 @@ export default function ContactSection() {
       id="contact"
       className="relative overflow-hidden border-t border-white/10 text-white"
     >
-      <div className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] pt-44 pb-28">
+      <div className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] px-4 pt-36 pb-16 md:px-0 md:pt-44 md:pb-28">
         <RailPath d={contactPath} className="top-0 left-0 h-24 w-full" />
         <RailCheckpoint
           href="#contact"

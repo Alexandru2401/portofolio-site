@@ -59,15 +59,15 @@ export default function ExperienceSection() {
               className="absolute top-1 left-0 size-[15px] rounded-full border-2 border-white/20 bg-[#0D0B12] transition-all duration-500 group-data-active:border-yellow-400 group-data-active:bg-yellow-400 group-data-active:shadow-[0_0_16px_2px_rgb(250_204_21/0.6)]"
             />
 
-            <div className="transition-opacity duration-500 not-group-data-active:opacity-40">
-              <p className="flex items-center gap-2 text-xs font-medium tracking-[0.25em] text-yellow-400 uppercase tabular-nums">
+            <div>
+              <p className="flex items-center gap-2 text-xs transition-opacity duration-500 not-group-data-active:opacity-40 font-medium tracking-[0.25em] text-yellow-400 uppercase tabular-nums">
                 <CalendarDays aria-hidden size={14} className="shrink-0" />
                 {job.period}
               </p>
               <div className="mt-3 flex items-center gap-3">
                 {/* pătrat alb ca o iconiță de aplicație — logo-urile au text
-                    închis la culoare; colorat doar când bara ajunge la job */}
-                <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-white p-1.5 ring-1 ring-white/10 grayscale transition-all duration-500 group-data-active:grayscale-0 group-data-active:shadow-[0_0_24px_-4px_rgb(250_204_21/0.5)]">
+                    închis la culoare; glow când bara ajunge la job */}
+                <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-white p-1.5 ring-1 ring-white/10 transition-all duration-500 group-data-active:shadow-[0_0_24px_-4px_rgb(250_204_21/0.5)]">
                   {job.logo ? (
                     <img
                       src={job.logo}
@@ -83,7 +83,7 @@ export default function ExperienceSection() {
                     </span>
                   )}
                 </span>
-                <h3 className="text-2xl font-semibold tracking-tight">
+                <h3 className="text-2xl font-semibold tracking-tight transition-opacity duration-500 not-group-data-active:opacity-40">
                   {job.company}
                 </h3>
               </div>
