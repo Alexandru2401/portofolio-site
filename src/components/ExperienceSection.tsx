@@ -1,7 +1,8 @@
 import { BriefcaseBusiness, CalendarDays, Code, MapPin } from "lucide-react";
 import RailCheckpoint from "./rail/RailCheckpoint";
 import RailPath from "./rail/RailPath";
-import { jobs } from "@/data/experience";
+import { useTranslation } from "react-i18next";
+import { useJobs } from "@/data/experience";
 import { LEFT_RAIL_X, railActive, type PathBuilder } from "@/lib/rail";
 
 // centrul checkpoint-ului (top-20) și locul unde bara cotește, sub el
@@ -22,6 +23,8 @@ const initials = (name: string) =>
     .join("");
 
 export default function ExperienceSection() {
+  const { t } = useTranslation();
+  const jobs = useJobs();
   return (
     <section
       id="experience"
@@ -30,18 +33,17 @@ export default function ExperienceSection() {
       <RailPath d={experiencePath} className="top-0 left-0 size-full" />
       <RailCheckpoint
         href="#experience"
-        label="Experiență"
+        label={t("nav.experience")}
         className="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2"
       />
 
       <header className="max-w-5xl pl-8 md:pl-16">
         <h2 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center font-semibold leading-[0.9] tracking-tighter">
-          Experiență în câmpul muncii
+          {t("experience.title")}
         </h2>
 
         <p className="mt-6 text-pretty text-center text-white/80">
-          Echipele și produsele la care am contribuit, de la cel mai recent în
-          jos.
+          {t("experience.subtitle")}
         </p>
       </header>
 
@@ -49,7 +51,7 @@ export default function ExperienceSection() {
         {jobs.map((job) => (
           // data-active e pus de railActive când bara ajunge la job
           <li
-            key={`${job.company}-${job.period}`}
+            key={job.id}
             ref={railActive(60)}
             className="group relative grid gap-6 pl-8 md:grid-cols-[15rem_1fr] md:gap-8 md:pl-16"
           >
@@ -119,7 +121,7 @@ export default function ExperienceSection() {
 
               <ul
                 className="mt-5 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4"
-                aria-label="Tehnologii"
+                aria-label={t("experience.techLabel")}
               >
                 <li aria-hidden className="text-white/40">
                   <Code size={16} />

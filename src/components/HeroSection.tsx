@@ -1,6 +1,7 @@
 import Lightfall from "@/components/common/Lightfall";
 import { ArrowRight, ArrowUpRight, LayoutGrid } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import avatar from "../../public/avatar.svg";
 
 const socials = [
@@ -13,10 +14,8 @@ const socials = [
   },
 ];
 
-// TODO: pune datele reale
-const LOCATION = "București, RO";
-
 export default function HeroSection() {
+  const { t } = useTranslation();
   return (
     <section id="hero" className="relative max-h-[90dvh] overflow-hidden">
       <div className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent)]">
@@ -34,9 +33,9 @@ export default function HeroSection() {
           <div className="[text-shadow:0_0_24px_rgb(47_41_58/0.9),0_2px_6px_rgb(0_0_0/0.5)]">
             <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs uppercase tracking-wider text-white">
               <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px] shadow-emerald-400/70" />
-              Disponibil pentru proiecte
+              {t("hero.available")}
               <span >·</span>
-              {LOCATION}
+              {t("hero.location")}
               <span>·</span>
               Remote
             </p>
@@ -46,12 +45,12 @@ export default function HeroSection() {
               <span
                 className="mt-2 block whitespace-nowrap text-[clamp(1.5rem,8vw,3rem)] text-white/80 tracking-tight"
               >
-                Fullstack developer
+                {t("hero.role")}
               </span>
             </h1>
 
             <p className="mt-6 max-w-md text-pretty text-white/60">
-              Dezvolt aplicații web scalabile, de la arhitectura backend până la interfața finală. Lucrez cu TypeScript, React, Next.js și Node.js, cu accent pe cod ușor de întreținut și performanță.
+              {t("hero.description")}
             </p>
 
 
@@ -63,7 +62,7 @@ export default function HeroSection() {
                   className="group flex items-center gap-2 rounded-full border border-transparent bg-yellow-400 p-2 px-4 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
                 >
                   <LayoutGrid aria-hidden size={18} />
-                  Vezi proiectele
+                  {t("hero.seeProjects")}
                   <ArrowRight
                     size={14}
                     className="opacity-60 transition-transform group-hover:translate-x-0.5"

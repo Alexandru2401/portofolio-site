@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 // apare după ce userul a parcurs un sfert din pagină
 const SHOW_AFTER = 0.25;
 
 export default function ScrollToTopButton() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -32,8 +34,8 @@ export default function ScrollToTopButton() {
     <button
       type="button"
       onClick={scrollToTop}
-      aria-label="Înapoi sus"
-      title="Înapoi sus"
+      aria-label={t("scrollToTop")}
+      title={t("scrollToTop")}
       // ascuns: nu poate fi focusat cu Tab și nu prinde click-uri
       tabIndex={visible ? 0 : -1}
       aria-hidden={!visible}

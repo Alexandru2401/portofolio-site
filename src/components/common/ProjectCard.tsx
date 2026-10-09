@@ -1,6 +1,7 @@
 import type { Ref } from "react";
 import { Link } from "react-router";
 import { ArrowRight, Play } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { Project } from "@/data/projects";
 import ProjectLinks from "./ProjectLinks";
 
@@ -13,6 +14,7 @@ export default function ProjectCard({
   index: number;
   ref?: Ref<HTMLElement>;
 }) {
+  const { t } = useTranslation();
   const alignLeft = index % 2 === 0;
   return (
     // data-active e pus de ProjectsSection când linia galbenă ajunge la card
@@ -27,7 +29,7 @@ export default function ProjectCard({
         <button
           type="button"
           className="group/media relative aspect-video overflow-hidden rounded-xl bg-[#1A1622] ring-1 ring-white/5"
-          aria-label="Redă preview proiect"
+          aria-label={t("projects.previewLabel")}
         >
           <span className="grid h-14 w-14 place-items-center rounded-full bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover/media:scale-110 group-hover/media:bg-yellow-400 absolute inset-0 m-auto">
             <Play
@@ -56,12 +58,12 @@ export default function ProjectCard({
         <h3 className="text-xl font-semibold tracking-tight text-white">
           {project.name}
         </h3>
-        <h4>Problema</h4>
+        <h4>{t("projects.problem")}</h4>
         <p className="mt-2 text-sm leading-relaxed text-white/60">
           {project.problem}
         </p>
 
-        <h4>Soluția</h4>
+        <h4>{t("projects.solution")}</h4>
         <p className="mt-2 text-sm leading-relaxed text-white/60">
           {project.solution}
         </p>
@@ -71,10 +73,10 @@ export default function ProjectCard({
 
           <Link
             to={`/proiecte/${project.id}`}
-            aria-label={`Detalii despre ${project.name}`}
+            aria-label={t("projects.detailsAbout", { name: project.name })}
             className="group/details ml-auto flex items-center gap-1.5 rounded-lg bg-yellow-400 px-3.5 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
           >
-            Detalii
+            {t("projects.details")}
             <ArrowRight
               aria-hidden
               size={14}

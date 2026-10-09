@@ -1,46 +1,39 @@
 import antenaLogo from "@/assets/antena_group_logo.webp";
 import fidemLogo from "@/assets/fidem_logo.png";
+import { useMessages } from "@/i18n";
+import type { Messages } from "@/i18n/locales/ro";
 
-export interface Job {
-  role: string;
+type JobId = keyof Messages["experience"]["jobs"];
+
+interface JobData {
+  /** textele sunt în i18n/locales sub experience.jobs.<id> */
+  id: JobId;
   company: string;
   /** opțional — fără logo apar inițialele firmei */
   logo?: string;
-  period: string;
-  location: string;
-  description: string;
-  highlights: string[];
   tech: string[];
 }
 
+/** datele jobului + textele în limba curentă */
+export type Job = JobData & Messages["experience"]["jobs"][JobId];
+
 // TODO: înlocuiește cu experiența reală, de la cel mai recent job în jos
-export const jobs: Job[] = [
+const jobData: JobData[] = [
   {
-    role: "Fullstack Developer",
+    id: "fidem",
     company: "Fidem",
     logo: fidemLogo,
-    period: "Sep. 2025 — prezent",
-    location: "București, România",
-    description:
-      "O frază despre ce face compania și care e rolul tău în echipă.",
-    highlights: [
-      "Am construit un CRM pentru call center, de la design la deploy.",
-      "Un rezultat concret, cu o cifră dacă se poate (ex. timp de încărcare -40%).",
-    ],
     tech: ["React", "TypeScript", "Node.js"],
   },
   {
-    role: "Network Admin",
+    id: "antena",
     company: "Antena Group",
     logo: antenaLogo,
-    period: " Feb. 2025 — Sep. 2025",
-    location: "București, România",
-    description:
-      "O frază despre ce face compania și care e rolul tău în echipă.",
-    highlights: [
-      "Am dezvoltat un catalog de produse cu dashboard de administrare.",
-      "Un lucru de care ești mândru din perioada asta.",
-    ],
     tech: ["React", "JavaScript", "Tailwind CSS"],
   },
 ];
+
+export function useJobs(): Job[] {
+  const { experience } = useMessages();
+  return jobData.map((data) => ({ ...data, ...experience.jobs[data.id] }));
+}

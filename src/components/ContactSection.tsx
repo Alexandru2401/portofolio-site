@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import RailCheckpoint from "./rail/RailCheckpoint";
 import RailPath from "./rail/RailPath";
 import {
@@ -33,6 +34,7 @@ const contactPath: PathBuilder = (w, h) => [
 ];
 
 export default function ContactSection() {
+  const { t } = useTranslation();
   return (
     <section
       id="contact"
@@ -42,22 +44,21 @@ export default function ContactSection() {
         <RailPath d={contactPath} className="top-0 left-0 h-24 w-full" />
         <RailCheckpoint
           href="#contact"
-          label="Contact"
+          label={t("nav.contact")}
           className="absolute top-24 left-1/2 -translate-x-1/2 -translate-y-1/2"
         />
 
         <p className="flex items-center justify-center gap-2 text-xs uppercase tracking-[0.25em] text-white">
-          Disponibil pentru remote
+          {t("contact.available")}
         </p>
 
         {/* titlu și subtitlu ca la celelalte secțiuni */}
         <h2 className="mt-5 text-center text-[clamp(1.75rem,5vw,4.5rem)] font-semibold leading-[0.9] tracking-tighter text-balance">
-          Hai să construim ceva împreună
+          {t("contact.title")}
         </h2>
 
         <p className="mx-auto mt-6 max-w-md text-center text-pretty text-white/60">
-          Ai un proiect, o idee sau un rol deschis? Scrie-mi — răspund de obicei
-          în aceeași zi.
+          {t("contact.text")}
         </p>
 
         <ul className="mt-6 flex flex-wrap justify-center gap-3">

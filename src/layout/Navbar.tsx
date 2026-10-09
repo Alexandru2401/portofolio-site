@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Download, Menu, X } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 import { CV_URL } from "@/data/links";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 // în ordinea secțiunilor din pages/Home.tsx
 const links = [
-  { id: "projects", label: "Proiecte" },
-  { id: "about-me", label: "Despre mine" },
-  { id: "experience", label: "Experiență" },
-  { id: "stack", label: "Tehnologii" },
-  { id: "contact", label: "Contact" },
-];
+  { id: "projects", label: "nav.projects" },
+  { id: "about-me", label: "nav.aboutMe" },
+  { id: "experience", label: "nav.experience" },
+  { id: "stack", label: "nav.stack" },
+  { id: "contact", label: "nav.contact" },
+] as const;
 
 // TODO: pune profilul real
 const LINKEDIN_URL = "https://linkedin.com/in/...";
@@ -59,6 +61,7 @@ function useActiveSection() {
 }
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const active = useActiveSection();
 
@@ -88,12 +91,13 @@ export default function Navbar() {
                     aria-current={active === id ? "true" : undefined}
                     className={linkClass(active === id)}
                   >
-                    {label}
+                    {t(label)}
                   </Link>
                 </li>
               ))}
             </ul>
 
+            <LanguageSwitcher />
             <a
               href={LINKEDIN_URL}
               target="_blank"
@@ -106,20 +110,20 @@ export default function Navbar() {
             <a
               href={CV_URL}
               download
-              aria-label="Descarcă CV"
+              aria-label={t("nav.downloadCv")}
               className={twMerge(
                 cvClass,
                 "size-9 justify-center p-0 md:size-auto md:px-4 md:py-2",
               )}
             >
               <Download aria-hidden size={16} />
-              <span className="hidden md:inline">Descarcă CV</span>
+              <span className="hidden md:inline">{t("nav.downloadCv")}</span>
             </a>
 
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              aria-label="Meniu"
+              aria-label={t("nav.menu")}
               aria-expanded={open}
               className="ml-1 grid size-9 place-items-center rounded-full text-white/80 hover:bg-white/10 lg:hidden"
             >
@@ -138,7 +142,7 @@ export default function Navbar() {
                   aria-current={active === id ? "true" : undefined}
                   className={twMerge(linkClass(active === id), "block")}
                 >
-                  {label}
+                  {t(label)}
                 </Link>
               </li>
             ))}

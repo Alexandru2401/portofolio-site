@@ -1,25 +1,11 @@
-import type { ReactNode } from "react";
 import { ArrowRight, Download } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import RailCheckpoint from "./rail/RailCheckpoint";
 import RailPath from "./rail/RailPath";
 import { CV_URL } from "@/data/links";
+import { useMessages } from "@/i18n";
+import type { Messages } from "@/i18n/locales/ro";
 import { verticalPath, type PathBuilder } from "@/lib/rail";
-
-// TODO: completează cu detalii personale (de unde ești, ce faci în afara codului)
-const principles = [
-  {
-    title: "Încep de la problemă",
-    text: "Înțeleg problema, userul final și constrângerile. Apoi aleg soluția potrivită.",
-  },
-  {
-    title: "Livrez complet",
-    text: "Frontend — Backend — Deploy. Pot duce o funcționalitate singur până în producție.",
-  },
-  {
-    title: "Scriu cod pentru oameni",
-    text: "Tipuri clare, componente mici, nume bune și o structură ușor de înțeles și întreținut.",
-  }
-];
 
 // cele două ramuri ale bifurcării: pornesc din mijlocul marginii de sus,
 // coboară pe laterale și se reîntâlnesc în mijlocul marginii de jos
@@ -50,14 +36,15 @@ const strList = (items: string[]) => (
   </>
 );
 
-const codeLines: ReactNode[] = [
-  com("// cine e omul din spatele proiectelor"),
+// comentariul, cheile și valorile din cod vin din traduceri
+const codeLines = (code: Messages["about"]["code"]) => [
+  com(code.comment),
   <>
     {kw("const")} alex = {"{"}
   </>,
   <>
     {"  "}
-    {key("rol")}: {str("Fullstack developer")},
+    {key(code.roleKey)}: {str("Fullstack developer")},
   </>,
   <>
     {"  "}
@@ -65,15 +52,15 @@ const codeLines: ReactNode[] = [
   </>,
   <>
     {"  "}
-    {key("focus")}: {str("produse complete, de la design la deploy")},
+    {key(code.focusKey)}: {str(code.focus)},
   </>,
   <>
     {"  "}
-    {key("construit")}: {strList(["CRM call center", "catalog de produse"])},
+    {key(code.builtKey)}: {strList(code.built)},
   </>,
   <>
     {"  "}
-    {key("disponibil")}: {str("remote")},
+    {key(code.availableKey)}: {str(code.available)},
   </>,
   <>
     {"}"} {kw("satisfies")} Developer;
@@ -88,14 +75,9 @@ const codeLines: ReactNode[] = [
   </>,
 ];
 
-// TODO: actualizează ce lucrezi acum
-const status = [
-  "disponibil pentru roluri remote",
-  "UTC+3 · răspund în 24h",
-  "acum: backend pe un CRM în producție",
-];
-
 export default function AboutMe() {
+  const { t } = useTranslation();
+  const { about } = useMessages();
   return (
     <section id="about-me" className="text-white">
       <div className="relative h-32">
@@ -107,19 +89,19 @@ export default function AboutMe() {
         <RailPath d={borderPaths} className="top-0 left-0 size-full" />
         <RailCheckpoint
           href="#about-me"
-          label="Despre mine"
+          label={t("nav.aboutMe")}
           className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
         />
 
         <h2 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center font-semibold leading-[0.9] tracking-tighter text-balance lg:whitespace-nowrap">
-          De la idee până în producție
+          {t("about.title")}
         </h2>
 
         <div className="mt-8 grid items-center gap-8 md:grid-cols-[1fr_1.05fr] [&>*]:min-w-0">
           {/* Cards */}
           <div>
             <ol className="flex flex-col gap-3">
-              {principles.map(({ title, text }, i) => (
+              {about.principles.map(({ title, text }, i) => (
                 <li
                   key={title}
                   className="group flex gap-4 rounded-xl p-4 ring-1 bg-[#1a1622] ring-white/10 transition-all duration-300 hover:bg-[#2F293A] hover:ring-yellow-400/60"
@@ -160,7 +142,7 @@ export default function AboutMe() {
 
               <pre className="overflow-x-auto py-5 text-[13px] leading-7 sm:text-sm">
                 <code className="grid">
-                  {codeLines.map((line, i) => (
+                  {codeLines(about.code).map((line, i) => (
                     <span key={i} className="flex hover:bg-white/5">
                       <span
                         aria-hidden
@@ -193,7 +175,7 @@ export default function AboutMe() {
                   <span className="text-yellow-400">$</span> npm run status
                 </p>
                 <ul className="mt-2 flex flex-col gap-1">
-                  {status.map((line) => (
+                  {about.status.map((line) => (
                     <li key={line} className="flex gap-2 text-white/70">
                       <span aria-hidden className="text-emerald-400">
                         ✔
@@ -208,7 +190,7 @@ export default function AboutMe() {
                     href="#contact"
                     className="group flex items-center gap-1.5 rounded-lg bg-yellow-400 px-3 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
                   >
-                    Hai să vorbim
+                    {t("about.letsTalk")}
                     <ArrowRight
                       aria-hidden
                       size={14}
@@ -221,7 +203,7 @@ export default function AboutMe() {
                     className="flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/8 px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
                   >
                     <Download aria-hidden size={14} />
-                    Descarcă CV
+                    {t("nav.downloadCv")}
                   </a>
                 </div>
               </div>

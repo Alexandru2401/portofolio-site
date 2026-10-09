@@ -128,6 +128,8 @@
   }
   html {
     @apply font-sans;
+    /* site-ul e închis — scrollbar-ul și controalele native ale browserului la fel */
+    color-scheme: dark;
     /* navbar-ul e fix — secțiunile nu ajung sub el la click pe un link */
     scroll-padding-top: 6rem;
   }

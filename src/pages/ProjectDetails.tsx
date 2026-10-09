@@ -1,15 +1,18 @@
 import ProjectLinks from "@/components/common/ProjectLinks";
-import { getProject, projects } from "@/data/projects";
+import { useProjects } from "@/data/projects";
 import { ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router";
 import NotFound from "./NotFound";
 
 export default function ProjectDetails() {
   const { id } = useParams();
-  const project = getProject(id);
-  if (!project) return <NotFound />;
+  const { t } = useTranslation();
+  const projects = useProjects();
+  const index = projects.findIndex((p) => p.id === id);
+  if (index === -1) return <NotFound />;
 
-  const index = projects.indexOf(project);
+  const project = projects[index];
 
 
   return (
@@ -23,7 +26,7 @@ export default function ProjectDetails() {
           size={16}
           className="transition-transform motion-safe:group-hover:-translate-x-0.5"
         />
-        Toate proiectele
+        {t("projects.allProjects")}
       </Link>
 
       {/* antet */}

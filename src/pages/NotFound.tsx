@@ -1,9 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router";
 import { ArrowLeft, Home } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function NotFound() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <section className="relative flex min-h-svh items-center overflow-hidden">
@@ -13,7 +15,7 @@ export default function NotFound() {
       <div className="relative z-10 mx-auto w-[min(72rem,90%)] text-center">
         <p className="flex items-center justify-center gap-2 text-xs uppercase tracking-[0.25em] text-white/50">
           <span className="size-1.5 rounded-full bg-rose-400 shadow-[0_0_12px] shadow-rose-400/70" />
-          Eroare 404
+          {t("notFound.error")}
         </p>
 
         <h1
@@ -24,15 +26,19 @@ export default function NotFound() {
         </h1>
 
         <h2 className="mt-4 text-[clamp(1.5rem,4vw,2.5rem)] font-semibold tracking-tight text-white">
-          Pagina nu a fost găsită
+          {t("notFound.title")}
         </h2>
 
         <p className="mx-auto mt-4 max-w-md text-pretty text-white/60">
-          Adresa{" "}
-          <code className="rounded-md border border-white/10 bg-white/5 px-1.5 py-0.5 font-mono text-sm text-white/80">
-            {pathname}
-          </code>{" "}
-          nu există sau a fost mutată.
+          <Trans
+            i18nKey="notFound.text"
+            values={{ path: pathname }}
+            components={{
+              code: (
+                <code className="rounded-md border border-white/10 bg-white/5 px-1.5 py-0.5 font-mono text-sm text-white/80" />
+              ),
+            }}
+          />
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -41,7 +47,7 @@ export default function NotFound() {
             className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur-md transition-colors hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
           >
             <Home size={14} />
-            Acasă
+            {t("notFound.home")}
           </Link>
           <button
             type="button"
@@ -52,7 +58,7 @@ export default function NotFound() {
               size={14}
               className="opacity-50 transition-transform group-hover:-translate-x-0.5"
             />
-            Înapoi
+            {t("notFound.back")}
           </button>
         </div>
       </div>
