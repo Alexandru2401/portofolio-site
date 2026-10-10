@@ -22,7 +22,10 @@ export const ro = {
   },
 
   projects: {
-    previewLabel: "Redă preview proiect",
+    previewLabel: "Redă video-ul pentru {{name}}",
+    closeVideo: "Închide video-ul",
+    videoComingSoon: "Video în curând",
+    videoUnsupported: "Browserul tău nu poate reda acest video.",
     problem: "Problema",
     solution: "Soluția",
     details: "Detalii",

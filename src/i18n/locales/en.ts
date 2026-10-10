@@ -22,7 +22,10 @@ export const en: Messages = {
   },
 
   projects: {
-    previewLabel: "Play project preview",
+    previewLabel: "Play the video for {{name}}",
+    closeVideo: "Close video",
+    videoComingSoon: "Video coming soon",
+    videoUnsupported: "Your browser can't play this video.",
     problem: "The problem",
     solution: "The solution",
     details: "Details",

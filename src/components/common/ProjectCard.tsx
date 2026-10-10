@@ -1,9 +1,10 @@
 import type { Ref } from "react";
 import { Link } from "react-router";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { Project } from "@/data/projects";
 import ProjectLinks from "./ProjectLinks";
+import ProjectVideo from "./ProjectVideo";
 
 export default function ProjectCard({
   project,
@@ -26,19 +27,7 @@ export default function ProjectCard({
     >
       {/* stânga: media + stack */}
       <div className="flex flex-col gap-4 flex-1">
-        <button
-          type="button"
-          className="group/media relative aspect-video overflow-hidden rounded-xl bg-[#1A1622] ring-1 ring-white/5"
-          aria-label={t("projects.previewLabel")}
-        >
-          <span className="grid h-14 w-14 place-items-center rounded-full bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover/media:scale-110 group-hover/media:bg-yellow-400 absolute inset-0 m-auto">
-            <Play
-              size={22}
-              className="translate-x-0.5 text-white transition-colors group-hover/media:text-[#1A1622]"
-              fill="currentColor"
-            />
-          </span>
-        </button>
+        <ProjectVideo project={project} />
 
         <ul className="flex flex-wrap gap-2">
           {project.tech.map(({ name, icon: Icon, color }) => (

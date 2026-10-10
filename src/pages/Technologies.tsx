@@ -29,13 +29,13 @@ export default function Technologies() {
   return (
     <section
       id="stack"
-      className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] pt-22 md:pt-36 pb-10 md:pb-40 text-white"
+      className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] pt-22 md:pt-20 pb-10 md:pb-20 text-white"
     >
       <RailPath d={stackPath} className="top-0 left-0 size-full" />
       <RailCheckpoint
         href="#stack"
         label={t("nav.stack")}
-        className="absolute -top-5 left-1/2 -translate-x-1/2 md:top-20 md:-left-10 md:translate-x-0"
+        className="absolute -top-5 left-1/2 -translate-x-1/2 md:top-2 md:-left-10 md:translate-x-0"
       />
 
       <header className="max-w-5xl px-8 md:pr-0 md:pl-16">

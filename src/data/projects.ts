@@ -29,6 +29,10 @@ interface ProjectData {
   tech: ProjectTech[];
   liveUrl?: string;
   repoUrl?: string;
+  /** demo video (ex. în /public/videos); fără el popup-ul arată un placeholder */
+  video?: string;
+  /** imaginea afișată înainte de play; fără ea se folosește primul cadru */
+  poster?: string;
 }
 
 /** datele proiectului + textele în limba curentă */
