@@ -60,7 +60,7 @@ export default function Technologies() {
               {/* nodul de pe linie (pe dreapta pe mobil) */}
               <span
                 aria-hidden
-                className="absolute top-1 right-0 size-[15px] md:right-auto md:left-0 rounded-full border-2 border-white/20 bg-[#0D0B12] transition-all duration-500 group-data-active:border-yellow-400 group-data-active:bg-yellow-400 group-data-active:shadow-[0_0_16px_2px_rgb(250_204_21/0.6)]"
+                className="absolute top-1 right-0 size-3.75 md:right-auto md:left-0 rounded-full border-2 border-white/20 bg-[#0D0B12] transition-all duration-500 group-data-active:border-yellow-400 group-data-active:bg-yellow-400 group-data-active:shadow-[0_0_16px_2px_rgb(250_204_21/0.6)]"
               />
 
               <div className="transition-opacity duration-500 not-group-data-active:opacity-70">
