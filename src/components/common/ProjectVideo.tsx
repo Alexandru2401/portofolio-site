@@ -2,12 +2,16 @@ import { Dialog } from "@base-ui/react/dialog";
 import { Play, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { Project } from "@/data/projects";
+import { cn } from "@/lib/utils";
 
 /** Preview-ul din card; la click deschide video-ul mare (sau un placeholder) într-un popup. */
 export default function ProjectVideo({
   project,
+  className,
 }: {
   project: Pick<Project, "name" | "video" | "poster">;
+  /** clase pentru chenarul din pagină (ex. h-full în loc de aspect-video) */
+  className?: string;
 }) {
   const { t } = useTranslation();
   const { name, video, poster } = project;
@@ -15,7 +19,10 @@ export default function ProjectVideo({
   return (
     <Dialog.Root>
       <Dialog.Trigger
-        className="group/media relative aspect-video overflow-hidden rounded-xl bg-[#1A1622] ring-1 ring-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
+        className={cn(
+          "group/media relative aspect-video overflow-hidden rounded-xl bg-[#1A1622] ring-1 ring-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400",
+          className,
+        )}
         aria-label={t("projects.previewLabel", { name })}
       >
         {poster ? (

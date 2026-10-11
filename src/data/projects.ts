@@ -2,6 +2,10 @@ import type { IconType } from "react-icons";
 import { BsTypescript } from "react-icons/bs";
 import { FaCss3, FaHtml5, FaNodeJs, FaReact } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
+import financeDashboard from "@/assets/projects/finance-app/cta.png";
+import financeTransactions from "@/assets/projects/finance-app/cta2.png";
+import financeMobile from "@/assets/projects/finance-app/hero.png";
+import financeLogo from "@/assets/projects/finance-app/logo.png";
 import { useMessages } from "@/i18n";
 import type { Messages } from "@/i18n/locales/ro";
 
@@ -33,6 +37,10 @@ interface ProjectData {
   video?: string;
   /** imaginea afișată înainte de play; fără ea se folosește primul cadru */
   poster?: string;
+  /** screenshot-urile din caruselul paginii de detalii; fără ele apar placeholdere */
+  images?: string[];
+  /** logo-ul afișat lângă titlu în pagina de detalii */
+  logo?: string;
 }
 
 /** datele proiectului + textele în limba curentă */
@@ -41,11 +49,13 @@ export type Project = ProjectData & Messages["projects"]["items"][ProjectId];
 // TODO: înlocuiește cu proiectele reale
 const projectData: ProjectData[] = [
   {
-    id: "crm-call-center",
+    id: "finance-app",
     year: "2024",
     tech: [tech.react, tech.typescript, tech.tailwind, tech.node],
     liveUrl: "#",
     repoUrl: "#",
+    logo: financeLogo,
+    images: [financeDashboard, financeTransactions, financeMobile],
   },
   {
     id: "catalog-produse",

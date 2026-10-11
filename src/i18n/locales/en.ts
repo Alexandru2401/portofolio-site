@@ -33,38 +33,70 @@ export const en: Messages = {
     liveDemo: "Live Demo",
     sourceCode: "Source Code",
     allProjects: "All projects",
+    previous: "Previous",
+    next: "Next",
+    navLabel: "Project navigation",
+    about: "About the project",
+    techStack: "Tech stack",
+    gallery: "Screenshots of {{name}}",
+    slide: "Image {{n}} of {{total}}",
+    previousImage: "Previous image",
+    nextImage: "Next image",
+    role: "Role",
+    duration: "Duration",
+    year: "Year",
+    features: "Features",
+    challenges: "Technical challenges",
+    decisions: "Technical decisions",
+    lessons: "What I learned",
+    ctaTitle: "Like what you see?",
+    ctaText: "If you have a similar project or an open role, let's talk.",
+    ctaButton: "Get in touch",
     items: {
-      "crm-call-center": {
-        name: "Call center CRM",
-        tagline: "Every call, customer and campaign on a single screen.",
+      "finance-app": {
+        name: "Finance Dashboard",
+        tagline:
+          "Income, expenses and budgets in one clear dashboard.",
         role: "Fullstack developer",
-        duration: "4 months",
+        duration: "6 months",
         problem:
-          "Agents worked across three different apps and lost the customer's context between calls.",
+          "Personal finances were scattered across bank apps and spreadsheets, with no clear picture of where the money goes.",
         solution:
-          "A CRM that brings the customer history, scripts and scheduling together in one interface.",
+          "A dashboard that centralizes transactions, groups them into categories and tracks monthly budgets.",
         overview:
           "Describe the context here: who the app is for, how many people use it, what existed before and why it was needed.",
         features: [
-          "Customer profile with the full call history",
-          "Callback scheduling with notifications",
-          "Dashboard with stats per agent and per campaign",
-          "Roles and permissions for agents and supervisors",
+          "Transaction list with search, filters and categories",
+          "Monthly budgets per category with overspending alerts",
+          "Charts for income, expenses and balance over time",
+          "Responsive interface, usable on mobile as well",
         ],
         challenges: [
           {
-            title: "Large lists without lag",
-            text: "How you solved a concrete technical problem — e.g. virtualizing lists with tens of thousands of customers.",
+            title: "Accurate money calculations",
+            text: "How you avoided floating point errors — e.g. storing amounts in minor units (cents) and formatting them only for display.",
           },
           {
-            title: "Real-time data",
-            text: "Another challenge and the decision you made, with the reasoning behind it.",
+            title: "Fast charts on large datasets",
+            text: "Another challenge and the decision you made, with the reasoning behind it — e.g. aggregating on the server per month.",
           },
         ],
+        decisions: [
+          {
+            title: "React Query for server state",
+            text: "Why you picked this — e.g. caching and server sync without boilerplate.",
+          },
+          {
+            title: "Tailwind for the design system",
+            text: "Which alternative you weighed and why you chose this one.",
+          },
+        ],
+        lessons:
+          "What you learned from the project or what you would do differently now — e.g. start end-to-end tests earlier.",
         results: [
-          { value: "-30%", label: "average time per call" },
-          { value: "50+", label: "agents active daily" },
-          { value: "1", label: "app instead of 3" },
+          { value: "100%", label: "transactions in one place" },
+          { value: "12", label: "expense categories" },
+          { value: "<1s", label: "dashboard load time" },
         ],
       },
       "catalog-produse": {
@@ -94,6 +126,18 @@ export const en: Messages = {
             text: "How you optimized product image loading.",
           },
         ],
+        decisions: [
+          {
+            title: "Server rendering for the catalog",
+            text: "Why you chose SSR/SSG for public pages — e.g. SEO and load time.",
+          },
+          {
+            title: "Zod validation on import",
+            text: "How you caught bad Excel data before it reached the database.",
+          },
+        ],
+        lessons:
+          "What you learned from the project or what you would do differently now.",
         results: [
           { value: "800+", label: "products in the catalog" },
           { value: "0", label: "offers sent manually" },
@@ -116,6 +160,14 @@ export const en: Messages = {
             text: "A technical problem and how you solved it.",
           },
         ],
+        decisions: [
+          {
+            title: "Technical decision",
+            text: "What you chose and why, compared to the obvious alternative.",
+          },
+        ],
+        lessons:
+          "What you learned from the project or what you would do differently now.",
         results: [
           { value: "—", label: "a measurable result" },
           { value: "—", label: "another result" },
@@ -146,7 +198,7 @@ export const en: Messages = {
       focusKey: "focus",
       focus: "complete products, from design to deploy",
       builtKey: "built",
-      built: ["call center CRM", "product catalog"],
+      built: ["finance dashboard", "product catalog"],
       availableKey: "available",
       available: "remote",
     },
@@ -160,8 +212,7 @@ export const en: Messages = {
 
   experience: {
     title: "Work experience",
-    subtitle:
-      "The teams and products I've contributed to, most recent first.",
+    subtitle: "The teams and products I've contributed to, most recent first.",
     techLabel: "Technologies",
     jobs: {
       fidem: {
@@ -200,7 +251,8 @@ export const en: Messages = {
       },
       backend: {
         title: "Backend",
-        description: "The APIs behind the interface and the rules that guard them.",
+        description:
+          "The APIs behind the interface and the rules that guard them.",
       },
       database: {
         title: "Database",
@@ -208,7 +260,8 @@ export const en: Messages = {
       },
       testing: {
         title: "Testing",
-        description: "Confidence that a new change doesn't break what already worked.",
+        description:
+          "Confidence that a new change doesn't break what already worked.",
       },
       delivery: {
         title: "Delivery",

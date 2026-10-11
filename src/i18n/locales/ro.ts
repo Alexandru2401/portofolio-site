@@ -33,39 +33,64 @@ export const ro = {
     liveDemo: "Live Demo",
     sourceCode: "Cod Sursă",
     allProjects: "Toate proiectele",
+    previous: "Înapoi",
+    next: "Înainte",
+    navLabel: "Navigare între proiecte",
+    about: "Despre proiect",
+    techStack: "Tech stack",
+    gallery: "Imagini din {{name}}",
+    slide: "Imaginea {{n}} din {{total}}",
+    previousImage: "Imaginea anterioară",
+    nextImage: "Imaginea următoare",
+    role: "Rol",
+    duration: "Durată",
+    year: "An",
+    features: "Funcționalități",
+    challenges: "Provocări tehnice",
+    decisions: "Decizii tehnice",
+    lessons: "Ce am învățat",
+    ctaTitle: "Îți place ce vezi?",
+    ctaText: "Dacă ai un proiect asemănător sau un rol deschis, hai să vorbim.",
+    ctaButton: "Contactează-mă",
     // TODO: înlocuiește cu proiectele reale; cheile sunt id-urile din data/projects.ts
     items: {
-      "crm-call-center": {
-        name: "CRM pentru call center",
-        tagline: "Toate apelurile, clienții și campaniile într-un singur ecran.",
+      "finance-app": {
+        name: "Finance Dashboard",
+        tagline: "Venituri, cheltuieli și bugete într-un singur dashboard clar.",
         role: "Fullstack developer",
-        duration: "4 luni",
+        duration: "6 luni",
         problem:
-          "Agenții lucrau în trei aplicații diferite și pierdeau contextul clientului între apeluri.",
+          "Finanțele personale erau împrăștiate între aplicații bancare și foi Excel, fără o imagine clară despre unde se duc banii.",
         solution:
-          "Un CRM care adună istoricul clientului, scripturile și programările într-o singură interfață.",
+          "Un dashboard care centralizează tranzacțiile, le grupează pe categorii și urmărește bugetele lunare.",
         overview:
           "Descrie aici contextul: pentru cine e aplicația, câți oameni o folosesc, ce era înainte și de ce a fost nevoie de ea.",
         features: [
-          "Fișa clientului cu tot istoricul de apeluri",
-          "Programare de reveniri cu notificări",
-          "Dashboard cu statistici pe agent și pe campanie",
-          "Roluri și permisiuni pentru agenți și supervizori",
+          "Lista de tranzacții cu căutare, filtre și categorii",
+          "Bugete lunare pe categorii cu alerte la depășire",
+          "Grafice pentru venituri, cheltuieli și sold în timp",
+          "Interfață responsive, folosibilă și pe mobil",
         ],
         challenges: [
           {
-            title: "Liste mari fără lag",
-            text: "Cum ai rezolvat o problemă tehnică concretă — ex. virtualizarea listelor cu zeci de mii de clienți.",
+            title: "Calcule corecte cu bani",
+            text: "Cum ai evitat erorile de virgulă mobilă — ex. sumele stocate în subunități (bani) și formatate doar la afișare.",
           },
           {
-            title: "Date în timp real",
-            text: "O altă provocare și decizia pe care ai luat-o, cu motivul din spatele ei.",
+            title: "Grafice rapide pe volume mari",
+            text: "O altă provocare și decizia pe care ai luat-o, cu motivul din spatele ei — ex. agregare pe server pe lună.",
           },
         ],
+        decisions: [
+          { title: "React Query pentru datele de pe server", text: "De ce ai ales soluția asta — ex. cache și sincronizare cu serverul fără boilerplate." },
+          { title: "Tailwind pentru design system", text: "Ce alternativă ai cântărit și de ce ai ales-o pe aceasta." },
+        ],
+        lessons:
+          "Ce ai învățat din proiect sau ce ai face altfel acum — ex. ai începe cu testele end-to-end mai devreme.",
         results: [
-          { value: "-30%", label: "timp mediu pe apel" },
-          { value: "50+", label: "agenți activi zilnic" },
-          { value: "1", label: "aplicație în loc de 3" },
+          { value: "100%", label: "tranzacții într-un singur loc" },
+          { value: "12", label: "categorii de cheltuieli" },
+          { value: "<1s", label: "timp de încărcare dashboard" },
         ],
       },
       "catalog-produse": {
@@ -96,6 +121,12 @@ export const ro = {
             text: "Cum ai optimizat încărcarea imaginilor de produs.",
           },
         ],
+        decisions: [
+          { title: "Randare pe server pentru catalog", text: "De ce ai ales SSR/SSG pentru paginile publice — ex. SEO și timp de încărcare." },
+          { title: "Validare cu Zod la import", text: "Cum ai prins datele greșite din Excel înainte să ajungă în baza de date." },
+        ],
+        lessons:
+          "Ce ai învățat din proiect sau ce ai face altfel acum.",
         results: [
           { value: "800+", label: "produse în catalog" },
           { value: "0", label: "oferte trimise manual" },
@@ -118,6 +149,11 @@ export const ro = {
             text: "O problemă tehnică și cum ai rezolvat-o.",
           },
         ],
+        decisions: [
+          { title: "Decizie tehnică", text: "Ce ai ales și de ce, față de alternativa evidentă." },
+        ],
+        lessons:
+          "Ce ai învățat din proiect sau ce ai face altfel acum.",
         results: [
           { value: "—", label: "un rezultat măsurabil" },
           { value: "—", label: "alt rezultat" },
@@ -149,7 +185,7 @@ export const ro = {
       focusKey: "focus",
       focus: "produse complete, de la design la deploy",
       builtKey: "construit",
-      built: ["CRM call center", "catalog de produse"],
+      built: ["dashboard financiar", "catalog de produse"],
       availableKey: "disponibil",
       available: "remote",
     },

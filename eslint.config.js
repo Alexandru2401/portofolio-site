@@ -21,10 +21,12 @@ export default defineConfig([
   },
   {
     // componentele generate de shadcn exportă și variantele (ex. buttonVariants)
-    // lângă componentă; nu le modificăm, ca `shadcn add` să le poată suprascrie
+    // lângă componentă și sincronizează starea din Embla într-un effect (carousel);
+    // nu le modificăm, ca `shadcn add` să le poată suprascrie
     files: ['src/components/ui/**/*.{ts,tsx}'],
     rules: {
       'react-refresh/only-export-components': 'off',
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
 ])
