@@ -79,7 +79,9 @@ export default function Technologies() {
           role="tablist"
           aria-orientation="vertical"
           onKeyDown={onTabKeyDown}
-          className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-col md:overflow-visible md:px-0 md:pb-0"
+          // padding-ul (compensat cu margini negative) lasă loc pentru contur și glow,
+          // altfel overflow-ul le taie; scrollbar-ul e ascuns, swipe-ul merge oricum
+          className="-m-2 flex gap-2 overflow-x-auto p-2 scrollbar-none [&::-webkit-scrollbar]:hidden md:m-0 md:flex-col md:overflow-visible md:p-0"
         >
           {stackLayers.map((layer, i) => {
             const selected = layer.id === active.id;
