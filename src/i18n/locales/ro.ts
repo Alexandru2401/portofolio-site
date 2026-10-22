@@ -233,7 +233,7 @@ export const ro = {
   stack: {
     title: "Tehnologiile folosite",
     subtitle:
-      "Un produs complet are straturi: design, frontend, API, deploy. Mai jos sunt uneltele pe care le folosesc pentru fiecare — derulează și urmărește cum se aprinde stack-ul.",
+      "Un produs complet are straturi: design, frontend, API, deploy. Mai jos sunt uneltele pe care le folosesc pentru fiecare — alege un strat din stânga ca să vezi tehnologiile lui.",
     // cheile sunt id-urile din data/technologies.ts
     layers: {
       frontend: {

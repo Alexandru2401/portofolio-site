@@ -1,5 +1,6 @@
 import RailCheckpoint from "@/components/rail/RailCheckpoint";
 import RailPath from "@/components/rail/RailPath";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { stackLayers } from "@/data/technologies";
 import { useMessages } from "@/i18n";
@@ -26,6 +27,20 @@ const stackPath: PathBuilder = (w, h) =>
 export default function Technologies() {
   const { t } = useTranslation();
   const { stack } = useMessages();
+  const [activeId, setActiveId] = useState(stackLayers[0].id);
+  const active = stackLayers.find((l) => l.id === activeId) ?? stackLayers[0];
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // săgețile mută selecția între tab-uri, ca la un tablist nativ
+  const onTabKeyDown = (e: KeyboardEvent) => {
+    const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+    if (!step) return;
+    e.preventDefault();
+    const i = stackLayers.indexOf(active);
+    const next = (i + step + stackLayers.length) % stackLayers.length;
+    setActiveId(stackLayers[next].id);
+    tabRefs.current[next]?.focus();
+  };
   return (
     <section
       id="stack"
@@ -48,62 +63,94 @@ export default function Technologies() {
         </p>
       </header>
 
-      <div className="relative mt-12 md:mt-24">
-        <ol className="flex flex-col gap-12 md:gap-8">
-          {stackLayers.map((layer, i) => (
-            // data-active e pus de railActive când bara ajunge la strat
-            <li
-              key={layer.id}
-              ref={railActive(60)}
-              className="group relative grid gap-4 pr-8 md:grid-cols-[15rem_1fr] md:gap-8 md:pr-0 md:pl-16"
-            >
-              {/* nodul de pe linie (pe dreapta pe mobil) */}
-              <span
-                aria-hidden
-                className="absolute top-1 right-0 size-3.75 md:right-auto md:left-0 rounded-full border-2 border-white/20 bg-[#0D0B12] transition-all duration-500 group-data-active:border-yellow-400 group-data-active:bg-yellow-400 group-data-active:shadow-[0_0_16px_2px_rgb(250_204_21/0.6)]"
-              />
+      {/* data-active e pus de railActive când bara ajunge la secțiune */}
+      <div
+        ref={railActive(60)}
+        className="group relative mt-12 grid gap-6 pr-8 md:mt-24 md:grid-cols-[15rem_1fr] md:gap-8 md:pr-0 md:pl-16"
+      >
+        {/* nodul de pe linie (pe dreapta pe mobil) */}
+        <span
+          aria-hidden
+          className="absolute top-1 right-0 size-3.75 md:right-auto md:left-0 rounded-full border-2 border-white/20 bg-[#0D0B12] transition-all duration-500 group-data-active:border-yellow-400 group-data-active:bg-yellow-400 group-data-active:shadow-[0_0_16px_2px_rgb(250_204_21/0.6)]"
+        />
 
-              <div className="transition-opacity duration-500 not-group-data-active:opacity-70">
+        {/* tab-urile: rând orizontal pe mobil, coloană în stânga pe desktop */}
+        <div
+          role="tablist"
+          aria-orientation="vertical"
+          onKeyDown={onTabKeyDown}
+          className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-col md:overflow-visible md:px-0 md:pb-0"
+        >
+          {stackLayers.map((layer, i) => {
+            const selected = layer.id === active.id;
+            return (
+              <button
+                key={layer.id}
+                ref={(el) => {
+                  tabRefs.current[i] = el;
+                }}
+                id={`stack-tab-${layer.id}`}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                aria-controls="stack-panel"
+                tabIndex={selected ? 0 : -1}
+                onClick={() => setActiveId(layer.id)}
+                className={`flex shrink-0 cursor-pointer items-baseline gap-3 rounded-md px-4 py-3 text-left ring-1 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-yellow-400 ${
+                  selected
+                    ? "bg-[#2F293A] ring-yellow-400/70 shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)]"
+                    : "bg-white/5 ring-white/20 text-white/85 hover:bg-white/10 hover:text-white hover:ring-white/40"
+                }`}
+              >
+                <span className="text-xs font-medium tracking-[0.25em] text-yellow-400 tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-base font-semibold tracking-tight md:text-lg">
+                  {stack.layers[layer.id].title}
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-                <h2 className="text-xl font-semibold tracking-tight md:mt-2 md:text-2xl">
-                  <span className="text-xs font-medium tracking-[0.25em] text-yellow-400 tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>   {stack.layers[layer.id].title}
-                </h2>
-                <p className="mt-2 text-sm text-pretty text-white/60">
-                  {stack.layers[layer.id].description}
-                </p>
-              </div>
+        {/* key pe strat ca animația de intrare să ruleze la fiecare schimbare */}
+        <div
+          key={active.id}
+          id="stack-panel"
+          role="tabpanel"
+          aria-labelledby={`stack-tab-${active.id}`}
+          className="animate-in fade-in slide-in-from-bottom-2 duration-500"
+        >
+          <p className="text-sm text-pretty text-white/60">
+            {stack.layers[active.id].description}
+          </p>
 
-              <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
-                {layer.tech.map(({ name, icon: Icon, color }, j) => (
-                  // galben doar în stratul curent; cele trecute revin la normal
-                  <li
-                    key={name}
-                    className="relative min-w-0 overflow-hidden rounded-md bg-[#2F293A] p-3 ring-1 ring-white/10 transition-all duration-300 hover:ring-yellow-400/70 hover:shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)] motion-safe:hover:-translate-y-1 group-current:ring-yellow-400/70 group-current:shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)]"
-                  >
-                    {/* lumină în culoarea brandului, aprinsă odată cu stratul */}
-                    <span
-                      aria-hidden
-                      className="pointer-events-none absolute -top-8 -right-8 size-24 rounded-full opacity-0 blur-2xl transition-opacity duration-700 group-data-active:opacity-25"
-                      style={{ background: color, transitionDelay: `${j * 70}ms` }}
-                    />
+          <ul className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+            {active.tech.map(({ name, icon: Icon, color }, j) => (
+              <li
+                key={name}
+                className="relative min-w-0 overflow-hidden rounded-md bg-[#2F293A] p-3 ring-1 ring-white/10 transition-all duration-300 hover:ring-yellow-400/70 hover:shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)] motion-safe:hover:-translate-y-1"
+              >
+                {/* lumină în culoarea brandului, aprinsă când bara ajunge aici */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -top-8 -right-8 size-24 rounded-full opacity-0 blur-2xl transition-opacity duration-700 group-data-active:opacity-25"
+                  style={{ background: color, transitionDelay: `${j * 70}ms` }}
+                />
 
-                    <div className="relative flex items-center gap-2.5">
-                      <Icon
-                        aria-hidden
-                        className="size-6 shrink-0 md:size-7 opacity-70 grayscale transition-all duration-500 group-data-active:opacity-100 group-data-active:grayscale-0"
-                        style={{ color, transitionDelay: `${j * 70}ms` }}
-                      />
-                      <h3 className="truncate text-sm font-medium md:text-base">{name}</h3>
-                    </div>
-                    <p className="relative mt-2 text-xs text-white/50 md:text-sm">{stack.roles[name]}</p>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ol>
+                <div className="relative flex items-center gap-2.5">
+                  <Icon
+                    aria-hidden
+                    className="size-6 shrink-0 md:size-7 opacity-70 grayscale transition-all duration-500 group-data-active:opacity-100 group-data-active:grayscale-0"
+                    style={{ color, transitionDelay: `${j * 70}ms` }}
+                  />
+                  <h3 className="truncate text-sm font-medium md:text-base">{name}</h3>
+                </div>
+                <p className="relative mt-2 text-xs text-white/50 md:text-sm">{stack.roles[name]}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

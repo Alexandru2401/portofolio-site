@@ -1,22 +1,17 @@
-import { useEffect, useState } from "react";
-import { ImageIcon } from "lucide-react";
+import { useRef, useState, type KeyboardEvent } from "react";
+import { ArrowLeft, ArrowRight, ImageIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
 // câte chenare goale arătăm până vin pozele reale
 const PLACEHOLDER_COUNT = 5;
 
+// distanța minimă (px) a unui swipe ca să schimbe slide-ul
+const SWIPE_THRESHOLD = 40;
+
 // săgețile stau în interiorul pozei, negre cu border alb ca butoanele din pagină
 const arrowClass =
-  "border-white/80 bg-black/70 text-white backdrop-blur-sm hover:bg-white hover:text-black disabled:opacity-0";
+  "absolute top-1/2 grid size-8 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-white/80 bg-black/70 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-black";
 
 /** Caruselul cu screenshot-uri; fără imagini arată placeholdere. */
 export default function ProjectCarousel({
@@ -32,38 +27,57 @@ export default function ProjectCarousel({
   const slides: (string | null)[] = images.length
     ? images
     : Array.from({ length: PLACEHOLDER_COUNT }, () => null);
-  const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
-  // punctul activ urmează slide-ul la care a ajuns Embla (click, swipe, tastatură)
-  useEffect(() => {
-    if (!api) return;
-    const onSelect = () => setCurrent(api.selectedScrollSnap());
-    api.on("select", onSelect);
-    return () => {
-      api.off("select", onSelect);
-    };
-  }, [api]);
+  // loop: după ultimul slide revine la primul și invers
+  const goTo = (i: number) =>
+    setCurrent((i + slides.length) % slides.length);
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "ArrowLeft") goTo(current - 1);
+    else if (e.key === "ArrowRight") goTo(current + 1);
+    else return;
+    e.preventDefault();
+  };
+
+  const onTouchEnd = (x: number) => {
+    if (touchStartX.current === null) return;
+    const dx = x - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(dx) >= SWIPE_THRESHOLD) goTo(current + (dx < 0 ? 1 : -1));
+  };
 
   const slideLabel = (i: number) =>
     t("projects.slide", { n: i + 1, total: slides.length });
 
   return (
-    <Carousel
-      setApi={setApi}
-      opts={{ loop: true }}
+    <section
+      role="region"
+      aria-roledescription="carousel"
       aria-label={t("projects.gallery", { name })}
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+      onTouchStart={(e) => (touchStartX.current = e.touches[0].clientX)}
+      onTouchEnd={(e) => onTouchEnd(e.changedTouches[0].clientX)}
       className={cn(
-        "overflow-hidden rounded-xl bg-[#1A1622] ring-1 ring-white/10",
+        "relative overflow-hidden rounded-xl bg-[#1A1622] ring-1 ring-white/10 focus-visible:outline-2 focus-visible:outline-yellow-400",
         className,
       )}
     >
-      <CarouselContent className="ml-0">
+      {/* banda cu toate slide-urile, mutată cu translate după slide-ul curent */}
+      <div
+        className="flex transition-transform duration-500 ease-out motion-reduce:transition-none"
+        style={{ transform: `translateX(-${current * 100}%)` }}
+      >
         {slides.map((src, i) => (
-          <CarouselItem
+          <div
             key={src ?? i}
+            role="group"
+            aria-roledescription="slide"
             aria-label={slideLabel(i)}
-            className="aspect-video pl-0"
+            aria-hidden={i !== current}
+            className="aspect-video w-full shrink-0"
           >
             {src ? (
               <img
@@ -84,18 +98,26 @@ export default function ProjectCarousel({
                 </div>
               </div>
             )}
-          </CarouselItem>
+          </div>
         ))}
-      </CarouselContent>
+      </div>
 
-      <CarouselPrevious
+      <button
+        type="button"
+        onClick={() => goTo(current - 1)}
         aria-label={t("projects.previousImage")}
         className={cn("left-3", arrowClass)}
-      />
-      <CarouselNext
+      >
+        <ArrowLeft aria-hidden size={16} />
+      </button>
+      <button
+        type="button"
+        onClick={() => goTo(current + 1)}
         aria-label={t("projects.nextImage")}
         className={cn("right-3", arrowClass)}
-      />
+      >
+        <ArrowRight aria-hidden size={16} />
+      </button>
 
       {/* punctele de jos — cel curent e mai lung și galben */}
       <div className="absolute inset-x-0 bottom-3 flex justify-center gap-1.5">
@@ -103,11 +125,11 @@ export default function ProjectCarousel({
           <button
             key={i}
             type="button"
-            onClick={() => api?.scrollTo(i)}
+            onClick={() => goTo(i)}
             aria-label={slideLabel(i)}
             aria-current={i === current}
             className={cn(
-              "h-1.5 rounded-full transition-all duration-300",
+              "h-1.5 cursor-pointer rounded-full transition-all duration-300",
               i === current
                 ? "w-6 bg-yellow-400"
                 : "w-1.5 bg-white/40 hover:bg-white/70",
@@ -115,6 +137,6 @@ export default function ProjectCarousel({
           />
         ))}
       </div>
-    </Carousel>
+    </section>
   );
 }
