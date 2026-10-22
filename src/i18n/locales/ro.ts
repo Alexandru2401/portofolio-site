@@ -1,7 +1,7 @@
 // sursa traducerilor — en.ts are același tip, deci o cheie lipsă e eroare de TS
 export const ro = {
   nav: {
-    projects: "Proiecte",
+    projects: "Proiecte personale",
     aboutMe: "Despre mine",
     experience: "Experiență",
     stack: "Tehnologii",
@@ -55,21 +55,23 @@ export const ro = {
     // TODO: înlocuiește cu proiectele reale; cheile sunt id-urile din data/projects.ts
     items: {
       "finance-app": {
-        name: "Finance Dashboard",
-        tagline: "Venituri, cheltuieli și bugete într-un singur dashboard clar.",
+        name: "SavingBox",
+        tagline:
+          "Aplicație de finanțe personale pentru venituri, cheltuieli și economii.",
         role: "Fullstack developer",
         duration: "6 luni",
         problem:
           "Finanțele personale erau împrăștiate între aplicații bancare și foi Excel, fără o imagine clară despre unde se duc banii.",
         solution:
-          "Un dashboard care centralizează tranzacțiile, le grupează pe categorii și urmărește bugetele lunare.",
+          "O aplicație care strânge veniturile, cheltuielile și economiile într-un singur loc, cu analize grafice ca să vezi clar unde se duc banii.",
         overview:
-          "Descrie aici contextul: pentru cine e aplicația, câți oameni o folosesc, ce era înainte și de ce a fost nevoie de ea.",
+          "Aplicație full-stack pentru gestionarea veniturilor, cheltuielilor și economiilor, cu analize grafice și interfață bilingvă (RO/EN).",
         features: [
-          "Lista de tranzacții cu căutare, filtre și categorii",
-          "Bugete lunare pe categorii cu alerte la depășire",
-          "Grafice pentru venituri, cheltuieli și sold în timp",
-          "Interfață responsive, folosibilă și pe mobil",
+          "API REST în Express + TypeScript cu arhitectură pe straturi (routes → controllers → services), validare cu Zod și sanitizarea input-ului",
+          "Autentificare JWT cu cookie-uri httpOnly și rotația refresh token-urilor, peste o schemă PostgreSQL cu triggere",
+          "Frontend React + Vite cu shadcn/ui, Tailwind v4 (dark mode), formulare multi-step și grafice Recharts (tendințe, distribuții, prognoze)",
+          "Medii separate dev/producție (două proiecte Supabase, configurare prin env), migrații versionate cu Supabase CLI și Git flow feature → dev → main",
+          "Deploy pe Netlify (frontend) și Render (API); CI cu GitHub Actions (lint, typecheck, build) și hook-uri pre-commit cu Husky",
         ],
         challenges: [
           {
@@ -82,8 +84,14 @@ export const ro = {
           },
         ],
         decisions: [
-          { title: "React Query pentru datele de pe server", text: "De ce ai ales soluția asta — ex. cache și sincronizare cu serverul fără boilerplate." },
-          { title: "Tailwind pentru design system", text: "Ce alternativă ai cântărit și de ce ai ales-o pe aceasta." },
+          {
+            title: "React Query pentru datele de pe server",
+            text: "De ce ai ales soluția asta — ex. cache și sincronizare cu serverul fără boilerplate.",
+          },
+          {
+            title: "Tailwind pentru design system",
+            text: "Ce alternativă ai cântărit și de ce ai ales-o pe aceasta.",
+          },
         ],
         lessons:
           "Ce ai învățat din proiect sau ce ai face altfel acum — ex. ai începe cu testele end-to-end mai devreme.",
@@ -122,11 +130,16 @@ export const ro = {
           },
         ],
         decisions: [
-          { title: "Randare pe server pentru catalog", text: "De ce ai ales SSR/SSG pentru paginile publice — ex. SEO și timp de încărcare." },
-          { title: "Validare cu Zod la import", text: "Cum ai prins datele greșite din Excel înainte să ajungă în baza de date." },
+          {
+            title: "Randare pe server pentru catalog",
+            text: "De ce ai ales SSR/SSG pentru paginile publice — ex. SEO și timp de încărcare.",
+          },
+          {
+            title: "Validare cu Zod la import",
+            text: "Cum ai prins datele greșite din Excel înainte să ajungă în baza de date.",
+          },
         ],
-        lessons:
-          "Ce ai învățat din proiect sau ce ai face altfel acum.",
+        lessons: "Ce ai învățat din proiect sau ce ai face altfel acum.",
         results: [
           { value: "800+", label: "produse în catalog" },
           { value: "0", label: "oferte trimise manual" },
@@ -142,7 +155,11 @@ export const ro = {
         solution: "Ce ai construit și cum rezolvă problema.",
         overview:
           "Descrie aici contextul: pentru cine e aplicația, câți oameni o folosesc, ce era înainte și de ce a fost nevoie de ea.",
-        features: ["Funcționalitate 1", "Funcționalitate 2", "Funcționalitate 3"],
+        features: [
+          "Funcționalitate 1",
+          "Funcționalitate 2",
+          "Funcționalitate 3",
+        ],
         challenges: [
           {
             title: "Provocare",
@@ -150,10 +167,12 @@ export const ro = {
           },
         ],
         decisions: [
-          { title: "Decizie tehnică", text: "Ce ai ales și de ce, față de alternativa evidentă." },
+          {
+            title: "Decizie tehnică",
+            text: "Ce ai ales și de ce, față de alternativa evidentă.",
+          },
         ],
-        lessons:
-          "Ce ai învățat din proiect sau ce ai face altfel acum.",
+        lessons: "Ce ai învățat din proiect sau ce ai face altfel acum.",
         results: [
           { value: "—", label: "un rezultat măsurabil" },
           { value: "—", label: "alt rezultat" },

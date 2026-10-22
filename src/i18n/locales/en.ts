@@ -2,7 +2,7 @@ import type { Messages } from "./ro";
 
 export const en: Messages = {
   nav: {
-    projects: "Projects",
+    projects: "Personal projects",
     aboutMe: "About me",
     experience: "Experience",
     stack: "Tech stack",
@@ -54,22 +54,23 @@ export const en: Messages = {
     ctaButton: "Get in touch",
     items: {
       "finance-app": {
-        name: "Finance Dashboard",
+        name: "SavingBox",
         tagline:
-          "Income, expenses and budgets in one clear dashboard.",
+          "Personal finance app for tracking income, expenses and savings.",
         role: "Fullstack developer",
         duration: "6 months",
         problem:
           "Personal finances were scattered across bank apps and spreadsheets, with no clear picture of where the money goes.",
         solution:
-          "A dashboard that centralizes transactions, groups them into categories and tracks monthly budgets.",
+          "An app that brings income, expenses and savings together in one place, with analytics that show clearly where the money goes.",
         overview:
-          "Describe the context here: who the app is for, how many people use it, what existed before and why it was needed.",
+          "Full-stack budgeting app for tracking income, expenses and savings, with analytics and a bilingual (RO/EN) interface.",
         features: [
-          "Transaction list with search, filters and categories",
-          "Monthly budgets per category with overspending alerts",
-          "Charts for income, expenses and balance over time",
-          "Responsive interface, usable on mobile as well",
+          "Built a layered Express + TypeScript REST API (routes → controllers → services) with Zod validation and input sanitization",
+          "Implemented JWT authentication with httpOnly cookies and refresh token rotation, backed by a PostgreSQL schema with triggers",
+          "Developed a React + Vite frontend with shadcn/ui, Tailwind v4 (dark mode), multi-step forms and Recharts analytics (trends, breakdowns, forecasts)",
+          "Set up separate dev/production environments (two Supabase projects, env-based config), versioned DB migrations via Supabase CLI, and a Git flow with feature → dev → main",
+          "Deployed the frontend on Netlify and the API on Render; CI with GitHub Actions (lint, typecheck, build) and Husky pre-commit hooks",
         ],
         challenges: [
           {

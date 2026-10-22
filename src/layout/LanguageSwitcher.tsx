@@ -37,6 +37,8 @@ export default function LanguageSwitcher() {
                   key={code}
                   value={code}
                   lang={code}
+                  // radio item-urile țin meniul deschis implicit
+                  closeOnClick
                   className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-white/80 outline-none select-none data-checked:text-white data-highlighted:bg-white/10 data-highlighted:text-white"
                 >
                   <span className="w-6 text-xs font-medium tracking-wider text-yellow-400 uppercase">

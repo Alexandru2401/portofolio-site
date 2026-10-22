@@ -2,6 +2,7 @@ import type { IconType } from "react-icons";
 import { BsTypescript } from "react-icons/bs";
 import { FaCss3, FaHtml5, FaNodeJs, FaReact } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
+import { SiExpress, SiPostgresql, SiSupabase } from "react-icons/si";
 import financeDashboard from "@/assets/projects/finance-app/cta.png";
 import financeTransactions from "@/assets/projects/finance-app/cta2.png";
 import financeMobile from "@/assets/projects/finance-app/hero.png";
@@ -22,6 +23,9 @@ const tech = {
   tailwind: { name: "Tailwind CSS", icon: RiTailwindCssFill, color: "#38BDF8" },
   typescript: { name: "TypeScript", icon: BsTypescript, color: "#3178C6" },
   node: { name: "Node.js", icon: FaNodeJs, color: "#5FA04E" },
+  express: { name: "Express", icon: SiExpress, color: "#FFFFFF" },
+  postgres: { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
+  supabase: { name: "Supabase", icon: SiSupabase, color: "#3FCF8E" },
 } satisfies Record<string, ProjectTech>;
 
 export type ProjectId = keyof Messages["projects"]["items"];
@@ -51,7 +55,14 @@ const projectData: ProjectData[] = [
   {
     id: "finance-app",
     year: "2024",
-    tech: [tech.react, tech.typescript, tech.tailwind, tech.node],
+    tech: [
+      tech.react,
+      tech.typescript,
+      tech.tailwind,
+      tech.express,
+      tech.postgres,
+      tech.supabase,
+    ],
     liveUrl: "#",
     repoUrl: "#",
     logo: financeLogo,
