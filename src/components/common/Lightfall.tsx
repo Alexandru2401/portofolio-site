@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useSyncExternalStore } from "react";
 import { Renderer, Program, Mesh, Triangle } from "ogl";
 
 export interface LightfallProps {
@@ -201,6 +201,15 @@ const DEFAULT_COLORS = ["#A6C8FF", "#5227FF", "#FF9FFC"];
 const MAX_DPR = 1;
 const FRAME_MS = 1000 / 30;
 
+// urmărește și schimbările făcute în sistem cât timp pagina e deschisă
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const subscribeReducedMotion = (onChange: () => void) => {
+  const mql = window.matchMedia(reducedMotionQuery);
+  mql.addEventListener("change", onChange);
+  return () => mql.removeEventListener("change", onChange);
+};
+const getReducedMotion = () => window.matchMedia(reducedMotionQuery).matches;
+
 const Lightfall: React.FC<LightfallProps> = ({
   className,
   dpr,
@@ -231,6 +240,10 @@ const Lightfall: React.FC<LightfallProps> = ({
   const rendererRef = useRef<Renderer | null>(null);
   const mouseTargetRef = useRef<[number, number]>([0, 0]);
   const lastTimeRef = useRef(0);
+  const reduceMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+  );
 
   useEffect(() => {
     const container = containerRef.current;
@@ -303,10 +316,6 @@ const Lightfall: React.FC<LightfallProps> = ({
     meshRef.current = mesh;
 
     // cu reduced motion — un singur cadru static, redesenat doar la resize
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
     const resize = () => {
       const rect = container.getBoundingClientRect();
       renderer.setSize(rect.width, rect.height);
@@ -422,6 +431,7 @@ const Lightfall: React.FC<LightfallProps> = ({
     mouseStrength,
     mouseRadius,
     mouseDampening,
+    reduceMotion,
   ]);
 
   return (

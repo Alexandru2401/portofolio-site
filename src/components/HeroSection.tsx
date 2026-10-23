@@ -18,10 +18,14 @@ export default function HeroSection() {
   const { t } = useTranslation();
   return (
     <section id="hero" className="relative max-h-[90dvh] overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent)]">
+      {/* fundal solid sub canvas — cu opacitate redusă altfel s-ar vedea grila din RootLayout */}
+      <div className="pointer-events-none absolute inset-0 bg-[#0D0B12] mask-[linear-gradient(to_bottom,black_70%,transparent)]">
         <Lightfall
+          className="opacity-40"
           backgroundColor="#2F293A"
           backgroundGlow={0.1}
+          density={0.3}
+          speed={0.25}
           mouseInteraction={false}
           dpr={0.5}
         />
@@ -30,26 +34,23 @@ export default function HeroSection() {
       <div className="relative z-10 mx-auto flex min-h-svh w-[min(64rem,90%)] items-center pb-16">
         <div className="grid w-full gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
           {/* stânga — textul; umbra îl desparte de liniile albe din Lightfall */}
-          <div className="[text-shadow:0_0_24px_rgb(47_41_58/0.9),0_2px_6px_rgb(0_0_0/0.5)]">
-            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs uppercase tracking-wider text-white">
-              <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px] shadow-emerald-400/70" />
-              {t("hero.available")}
-              <span >·</span>
-              {t("hero.location")}
-              <span>·</span>
-              Remote
-            </p>
+          <div className="relative isolate [text-shadow:0_0_24px_rgb(47_41_58/0.9),0_2px_6px_rgb(0_0_0/0.5)]">
+            {/* pată difuză doar sub text, în culoarea fundalului din Lightfall — se topește în animație */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -inset-x-12 -inset-y-10 -z-10 rounded-[40%] bg-[#0D0B12]/80 blur-3xl"
+            />
 
-            <h1 className="mt-5 text-[clamp(1.75rem,5vw,4.5rem)] font-semibold leading-[0.9] tracking-tight text-white">
+            <h1 className="mt-5 text-[clamp(1.75rem,5vw,4.5rem)] font-semibold leading-[0.9] text-slate-200">
               Alex DEV
               <span
-                className="mt-2 block whitespace-nowrap text-[clamp(1.5rem,8vw,3rem)] text-white/80 tracking-tight"
+                className="mt-2 block whitespace-nowrap text-[clamp(1.5rem,8vw,3rem)] text-slate-200/80"
               >
                 {t("hero.role")}
               </span>
             </h1>
 
-            <p className="mt-6 max-w-md text-pretty text-white/60">
+            <p className="mt-6 max-w-md text-pretty text-slate-200/80">
               {t("hero.description")}
             </p>
 
