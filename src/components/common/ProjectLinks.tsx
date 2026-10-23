@@ -3,7 +3,7 @@ import { SiNetlify } from "react-icons/si";
 import { useTranslation } from "react-i18next";
 import type { Project } from "@/data/projects";
 
-/** Live Demo + Cod Sursă, în culorile Netlify și GitHub. */
+/** Live Demo (galben, acțiunea principală) + Cod Sursă în culorile GitHub. */
 export default function ProjectLinks({
   project,
 }: {
@@ -13,12 +13,12 @@ export default function ProjectLinks({
   return (
     <>
       {project.liveUrl && (
-        // Netlify: teal de brand cu text navy
+        // acțiunea principală: galbenul site-ului, cu logo-ul Netlify
         <a
           href={project.liveUrl}
           target="_blank"
           rel="noopener"
-          className="flex items-center gap-2 rounded-lg bg-[#00C7B7] px-3.5 py-1.5 text-sm font-semibold text-[#0E1E25] transition-colors hover:bg-[#32E6E2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#32E6E2]"
+          className="flex items-center gap-2 rounded-full bg-yellow-400 px-3.5 py-1.5 text-sm font-semibold text-[#1A1622] transition-colors hover:bg-yellow-300 active:bg-yellow-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
         >
           <SiNetlify aria-hidden size={18} />
           {t("projects.liveDemo")}
@@ -30,7 +30,7 @@ export default function ProjectLinks({
           href={project.repoUrl}
           target="_blank"
           rel="noopener"
-          className="flex items-center gap-2 rounded-lg border border-[#f0f6fc1a] bg-[#212830] px-3.5 py-1.5 text-sm font-semibold text-[#f0f6fc] transition-colors hover:border-[#3d444d] hover:bg-[#2a313c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f6feb]"
+          className="flex items-center gap-2 rounded-full border border-[#f0f6fc1a] bg-[#212830] px-3.5 py-1.5 text-sm font-semibold text-[#f0f6fc] transition-colors hover:border-[#3d444d] hover:bg-[#2a313c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f6feb]"
         >
           <FaGithub aria-hidden size={18} />
           {t("projects.sourceCode")}

@@ -2,7 +2,7 @@ import type { Messages } from "./ro";
 
 export const en: Messages = {
   nav: {
-    projects: "Personal projects",
+    projects: "Projects",
     aboutMe: "About me",
     experience: "Experience",
     stack: "Tech stack",
@@ -29,6 +29,8 @@ export const en: Messages = {
     problem: "The problem",
     solution: "The solution",
     details: "Details",
+    clientProject: "Client project",
+    personalProject: "Personal project",
     detailsAbout: "Details about {{name}}",
     liveDemo: "Live Demo",
     sourceCode: "Source Code",
@@ -95,9 +97,9 @@ export const en: Messages = {
         lessons:
           "What you learned from the project or what you would do differently now — e.g. start end-to-end tests earlier.",
         results: [
-          { value: "100%", label: "transactions in one place" },
-          { value: "12", label: "expense categories" },
-          { value: "<1s", label: "dashboard load time" },
+          { value: "20", label: "active users" },
+          { value: "1000+", label: "transactions" },
+          { value: "99,9%", label: "uptime" },
         ],
       },
       ceramico: {
@@ -143,8 +145,8 @@ export const en: Messages = {
         lessons:
           "What you learned from the project or what you would do differently now.",
         results: [
-          { value: "3", label: "multi-value filter attributes" },
-          { value: "100%", label: "shareable filter state" },
+          { value: "100", label: "daily visitors" },
+          { value: "99,9%", label: "uptime" },
         ],
       },
     },

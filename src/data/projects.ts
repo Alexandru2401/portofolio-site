@@ -40,6 +40,9 @@ interface ProjectData {
   /** apare în URL: /proiecte/:id; textele sunt în i18n/locales sub projects.items.<id> */
   id: ProjectId;
   year: string;
+  /** afișat pe card ca badge „Proiect client” / „Proiect personal” */
+  projectType: "personal" | "client";
+  client?: string;
   tech: ProjectTech[];
   liveUrl?: string;
   repoUrl?: string;
@@ -47,7 +50,7 @@ interface ProjectData {
   video?: string;
   /** imaginea afișată înainte de play; fără ea se folosește primul cadru */
   poster?: string;
-  /** screenshot-urile din caruselul paginii de detalii; fără ele apar placeholdere */
+  /** screenshot-urile din caruselul paginii de detalii; prima apare și pe card */
   images?: string[];
   /** logo-ul afișat lângă titlu în pagina de detalii */
   logo?: string;
@@ -61,6 +64,7 @@ const projectData: ProjectData[] = [
   {
     id: "finance-app",
     year: "2024",
+    projectType: "personal",
     tech: [
       tech.react,
       tech.typescript,
@@ -77,6 +81,8 @@ const projectData: ProjectData[] = [
   {
     id: "ceramico",
     year: "2025",
+    projectType: "client",
+    client: "Ceramico",
     tech: [tech.next, tech.typescript, tech.tailwind, tech.supabase],
     liveUrl: "#",
     repoUrl: "#",

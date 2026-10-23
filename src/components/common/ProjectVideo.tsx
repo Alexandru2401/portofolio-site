@@ -44,11 +44,12 @@ export default function ProjectVideo({
           />
         ) : null}
 
-        <span className="absolute inset-0 m-auto grid h-14 w-14 place-items-center rounded-full bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover/media:scale-110 group-hover/media:bg-yellow-400">
+        {/* galben din start, ca să se vadă că imaginea are video */}
+        <span className="absolute inset-0 m-auto grid h-14 w-14 place-items-center rounded-full bg-yellow-400 shadow-[0_0_24px_-4px_rgb(250_204_21/0.6)] ring-4 ring-yellow-400/25 transition-all duration-300 group-hover/media:bg-yellow-300 motion-safe:group-hover/media:scale-110">
           <Play
             aria-hidden
             size={22}
-            className="translate-x-0.5 text-white transition-colors group-hover/media:text-[#1A1622]"
+            className="translate-x-0.5 text-[#1A1622]"
             fill="currentColor"
           />
         </span>

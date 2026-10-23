@@ -1,7 +1,7 @@
 // sursa traducerilor — en.ts are același tip, deci o cheie lipsă e eroare de TS
 export const ro = {
   nav: {
-    projects: "Proiecte personale",
+    projects: "Proiecte",
     aboutMe: "Despre mine",
     experience: "Experiență",
     stack: "Tehnologii",
@@ -29,6 +29,8 @@ export const ro = {
     problem: "Problema",
     solution: "Soluția",
     details: "Detalii",
+    clientProject: "Proiect client",
+    personalProject: "Proiect personal",
     detailsAbout: "Detalii despre {{name}}",
     liveDemo: "Live Demo",
     sourceCode: "Cod Sursă",
@@ -96,9 +98,9 @@ export const ro = {
         lessons:
           "Ce ai învățat din proiect sau ce ai face altfel acum — ex. ai începe cu testele end-to-end mai devreme.",
         results: [
-          { value: "100%", label: "tranzacții într-un singur loc" },
-          { value: "12", label: "categorii de cheltuieli" },
-          { value: "<1s", label: "timp de încărcare dashboard" },
+          { value: "20", label: "utilizatori activi" },
+          { value: "1000+", label: "tranzacții" },
+          { value: "99,9%", label: "uptime" },
         ],
       },
       ceramico: {
@@ -143,8 +145,8 @@ export const ro = {
         ],
         lessons: "Ce ai învățat din proiect sau ce ai face altfel acum.",
         results: [
-          { value: "3", label: "atribute de filtrare cu valori multiple" },
-          { value: "100%", label: "stare a filtrelor partajabilă" },
+          { value: "100", label: "vizitatori zilnic" },
+          { value: "99,9%", label: "uptime" },
         ],
       },
     },
