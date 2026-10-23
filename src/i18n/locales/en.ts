@@ -15,9 +15,9 @@ export const en: Messages = {
   hero: {
     available: "Available for projects",
     location: "Bucharest, RO",
-    role: "Fullstack developer",
+    role: "Full-stack developer",
     description:
-      "I build scalable web applications, from the backend architecture to the final interface. I work with TypeScript, React, Next.js and Node.js, with a focus on maintainable code and performance.",
+      "I build web applications end-to-end — from APIs and databases to React interfaces. I focus on clear code, performance and features that are easy to maintain.",
     seeProjects: "See projects",
   },
 

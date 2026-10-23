@@ -29,7 +29,7 @@ const cvClass =
 
 const linkClass = (isActive: boolean) =>
   twMerge(
-    "rounded-full px-4 py-2 text-sm transition-colors",
+    "rounded-full px-4 py-2 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60",
     "text-white/80 hover:text-white hover:bg-white/10",
     isActive && "bg-white/15 text-white",
   );
@@ -127,7 +127,7 @@ export default function Navbar() {
               onClick={() => setOpen((v) => !v)}
               aria-label={t("nav.menu")}
               aria-expanded={open}
-              className="ml-1 grid size-9 place-items-center rounded-full text-white/80 hover:bg-white/10 lg:hidden"
+              className="ml-1 grid size-9 place-items-center rounded-full text-white/80 transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60 lg:hidden"
             >
               {open ? <X size={20} /> : <Menu size={20} />}
             </button>

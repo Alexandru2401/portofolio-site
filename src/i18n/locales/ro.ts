@@ -15,9 +15,9 @@ export const ro = {
     available: "Disponibil pentru proiecte",
     // TODO: pune datele reale
     location: "București, RO",
-    role: "Fullstack developer",
+    role: "Full-stack developer",
     description:
-      "Dezvolt aplicații web scalabile, de la arhitectura backend până la interfața finală. Lucrez cu TypeScript, React, Next.js și Node.js, cu accent pe cod ușor de întreținut și performanță.",
+      "Construiesc aplicații web end-to-end — de la API-uri și baze de date până la interfețe React. Pun accent pe cod clar, performanță și funcționalități ușor de întreținut.",
     seeProjects: "Vezi proiectele",
   },
 
