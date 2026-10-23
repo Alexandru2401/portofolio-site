@@ -154,19 +154,15 @@ export const en: Messages = {
 
   about: {
     title: "From idea to production",
-    principles: [
-      {
-        title: "I start from the problem",
-        text: "I understand the problem, the end user and the constraints. Then I pick the right solution.",
-      },
-      {
-        title: "I deliver end to end",
-        text: "Frontend — Backend — Deploy. I can take a feature to production on my own.",
-      },
-      {
-        title: "I write code for people",
-        text: "Clear types, small components, good names and a structure that's easy to understand and maintain.",
-      },
+    story: [
+      "I started in infrastructure, as a network admin, and moved into development from there. The networking side still helps me understand what happens to an app after deploy.",
+      "Right now I work on the backend of a CRM in production, with Node.js and TypeScript.",
+      "I'm interested in architecture and complete products: taking a feature from idea to production and keeping it easy to maintain.",
+    ],
+    facts: [
+      { value: "1+ year", label: "Production experience" },
+      { value: "Backend", label: "Node.js · TypeScript" },
+      { value: "Infrastructure", label: "Networking background" },
     ],
     code: {
       comment: "// the person behind the projects",

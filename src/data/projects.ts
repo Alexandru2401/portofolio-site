@@ -73,7 +73,7 @@ const projectData: ProjectData[] = [
       tech.postgres,
       tech.supabase,
     ],
-    liveUrl: "#",
+    liveUrl: "https://savingbox.netlify.app/",
     repoUrl: "#",
     logo: financeLogo,
     images: [financeDashboard, financeTransactions, financeMobile],

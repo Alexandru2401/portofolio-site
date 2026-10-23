@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import type { Project } from "@/data/projects";
 import ProjectLinks from "./ProjectLinks";
 import ProjectVideo from "./ProjectVideo";
+import StatStrip from "./StatStrip";
 
 // subtitlurile din card — ca etichetele din pagina de detalii, ca să nu se confunde cu textul
 const subtitleClass =
@@ -80,23 +81,7 @@ export default function ProjectCard({
 
         {/* cifre reale din projects.items.<id>.results — doar unde există */}
         {/* bandă de statistici: cifra mare sus, eticheta mică dedesubt, separate prin linii */}
-        {project.results.length > 0 && (
-          <dl className="mt-5 flex divide-x divide-white/10 overflow-hidden">
-            {project.results.map(({ value, label }) => (
-              <div
-                key={label}
-                className="flex min-w-0 flex-1 flex-col-reverse items-center gap-0.5 py-2"
-              >
-                <dt className="text-[0.6875rem] leading-tight text-balance font-medium tracking-wider text-slate-200/55 uppercase">
-                  {label}
-                </dt>
-                <dd className="text-lg leading-none font-semibold text-slate-100 tabular-nums">
-                  {value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        )}
+        <StatStrip items={project.results} className="mt-5" />
 
         {/* îngust: butoanele împart rândul, „Detalii” dedesubt pe toată lățimea; lat: un singur rând */}
         <div className="mt-auto flex flex-col gap-3 pt-6 @sm:flex-row @sm:items-center">

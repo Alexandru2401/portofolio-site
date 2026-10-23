@@ -2,7 +2,11 @@ import { ArrowRight, Download } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import RailCheckpoint from "./rail/RailCheckpoint";
 import RailPath from "./rail/RailPath";
+import StatStrip from "./common/StatStrip";
 import { CV_URL } from "@/data/links";
+
+// TODO: poza profesională (ex. import din @/assets) — fără ea textul ocupă toată coloana
+const ABOUT_PHOTO: string | undefined = undefined;
 import { useMessages } from "@/i18n";
 import type { Messages } from "@/i18n/locales/ro";
 import { verticalPath, type PathBuilder } from "@/lib/rail";
@@ -98,26 +102,36 @@ export default function AboutMe() {
         </h2>
 
         <div className="mt-8 grid items-center gap-8 md:grid-cols-[1fr_1.05fr] [&>*]:min-w-0">
-          {/* Cards */}
+          {/* povestea — text direct pe fundal, fără card, ca să contrasteze cu fereastra de cod */}
           <div>
-            <ol className="flex flex-col gap-3">
-              {about.principles.map(({ title, text }, i) => (
-                <li
-                  key={title}
-                  className="group flex gap-4 rounded-xl p-4 ring-1 bg-[#1a1622] ring-white/10 transition-all duration-300 hover:bg-[#2F293A] hover:ring-yellow-400/60"
-                >
-                  <span className="pt-0.5 text-xs font-medium tracking-[0.25em] text-yellow-400 tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h3 className="font-medium">{title}</h3>
-                    <p className="mt-1 text-sm text-pretty text-white/70">
-                      {text}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <div className="flex items-start gap-5">
+              {ABOUT_PHOTO && (
+                <img
+                  src={ABOUT_PHOTO}
+                  alt="Alex"
+                  className="size-20 shrink-0 rounded-2xl object-cover ring-1 ring-white/10 sm:size-24"
+                />
+              )}
+              <div className="flex max-w-xl flex-col gap-4">
+                {about.story.map((paragraph, i) => (
+                  <p
+                    key={paragraph}
+                    className={
+                      i === 0
+                        ? "text-lg leading-relaxed text-pretty text-slate-200"
+                        : "leading-relaxed text-pretty text-slate-200"
+                    }
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            <StatStrip
+              items={about.facts}
+              className="mt-8 max-w-xl border-y border-white/10 py-2"
+            />
           </div>
 
           {/* Code editor - ts */}
@@ -160,7 +174,7 @@ export default function AboutMe() {
             </figure>
 
             {/* terminal */}
-            <figure className="relative mt-4 overflow-hidden rounded-xl bg-[#0D0B12]/95 font-mono text-[13px] ring-1 ring-white/15 shadow-2xl shadow-black/60 backdrop-blur-md md:absolute md:-right-10 md:-bottom-26 md:mt-0 md:w-[23rem]">
+            <figure className="relative mt-4 overflow-hidden rounded-xl bg-[#0D0B12]/95 font-mono text-xs ring-1 ring-white/15 shadow-2xl shadow-black/60 backdrop-blur-md md:absolute md:-right-10 md:-bottom-20 md:mt-0 md:w-80">
               <div className="flex items-center gap-3 border-b border-white/10 bg-[#2F293A] px-3 py-2">
                 <div aria-hidden className="flex gap-1.5">
                   <span className="size-2.5 rounded-full bg-white/15" />
@@ -170,7 +184,7 @@ export default function AboutMe() {
                 <figcaption className="text-xs text-white/50">terminal</figcaption>
               </div>
 
-              <div className="p-4">
+              <div className="p-3">
                 <p className="text-white/85">
                   <span className="text-yellow-400">$</span> npm run status
                 </p>
@@ -185,24 +199,24 @@ export default function AboutMe() {
                   ))}
                 </ul>
 
-                <div className="mt-4 flex flex-wrap gap-2 font-sans">
+                <div className="mt-3 flex flex-wrap gap-2 font-sans">
                   <a
                     href="#contact"
-                    className="group flex items-center gap-1.5 rounded-lg bg-yellow-400 px-3 py-1.5 text-sm font-medium text-[#1A1622] transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
+                    className="group flex items-center gap-1.5 rounded-lg bg-yellow-400 px-2.5 py-1 text-xs font-medium text-[#1A1622] transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
                   >
                     {t("about.letsTalk")}
                     <ArrowRight
                       aria-hidden
-                      size={14}
+                      size={12}
                       className="transition-transform motion-safe:group-hover:translate-x-0.5"
                     />
                   </a>
                   <a
                     href={CV_URL}
                     download
-                    className="flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/8 px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+                    className="flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/8 px-2.5 py-1 text-xs text-white/80 transition-colors hover:bg-white/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
                   >
-                    <Download aria-hidden size={14} />
+                    <Download aria-hidden size={12} />
                     {t("nav.downloadCv")}
                   </a>
                 </div>

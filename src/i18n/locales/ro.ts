@@ -154,20 +154,17 @@ export const ro = {
 
   about: {
     title: "De la idee până în producție",
-    // TODO: completează cu detalii personale (de unde ești, ce faci în afara codului)
-    principles: [
-      {
-        title: "Încep de la problemă",
-        text: "Înțeleg problema, userul final și constrângerile. Apoi aleg soluția potrivită.",
-      },
-      {
-        title: "Livrez complet",
-        text: "Frontend — Backend — Deploy. Pot duce o funcționalitate singur până în producție.",
-      },
-      {
-        title: "Scriu cod pentru oameni",
-        text: "Tipuri clare, componente mici, nume bune și o structură ușor de înțeles și întreținut.",
-      },
+    // de unde am pornit · ce fac acum · ce mă interesează
+    story: [
+      "Am pornit din infrastructură, ca network admin, iar de acolo am trecut în development. Partea de rețea mă ajută și acum să înțeleg ce se întâmplă cu o aplicație după deploy.",
+      "Acum lucrez pe backend la un CRM aflat în producție, cu Node.js și TypeScript.",
+      "Mă interesează arhitectura și produsele complete: să duc o funcționalitate de la idee până în producție și să rămână ușor de întreținut.",
+    ],
+    // pe un rând, ca statisticile de la proiecte; perioadele trebuie să se potrivească cu experience
+    facts: [
+      { value: "1+ an", label: "Experiență în producție" },
+      { value: "Backend", label: "Node.js · TypeScript" },
+      { value: "Infrastructură", label: "Background în rețelistică" },
     ],
     code: {
       comment: "// cine e omul din spatele proiectelor",
