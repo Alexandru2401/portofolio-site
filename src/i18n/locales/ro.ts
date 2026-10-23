@@ -101,81 +101,50 @@ export const ro = {
           { value: "<1s", label: "timp de încărcare dashboard" },
         ],
       },
-      "catalog-produse": {
-        name: "Catalog de produse",
+      ceramico: {
+        name: "Ceramico",
         tagline:
-          "Catalog public cu dashboard de administrare pentru echipa de vânzări.",
+          "Catalog de produse pentru un magazin de gresie și faianță, cu filtrare avansată și dashboard de administrare.",
         role: "Fullstack developer",
         duration: "3 luni",
         problem:
-          "Produsele erau ținute în Excel, iar clienții primeau oferte trimise manual pe email.",
+          "Un magazin de gresie și faianță nu avea un catalog online în care clienții să caute și să filtreze produsele după culoare, dimensiuni sau utilizare.",
         solution:
-          "Un catalog online cu filtre și un panou de administrare din care echipa actualizează produsele singură.",
+          "Un catalog full-stack cu filtrare avansată, căutare globală și un dashboard de administrare din care produsele și imaginile se gestionează direct.",
         overview:
-          "Descrie aici contextul: pentru cine e aplicația, câți oameni o folosesc, ce era înainte și de ce a fost nevoie de ea.",
+          "Catalog full-stack pentru un magazin de gresie și faianță, cu filtrare avansată, căutare globală și dashboard de administrare a produselor.",
         features: [
-          "Căutare și filtre pe categorii, preț și stoc",
-          "Dashboard pentru adăugat și editat produse",
-          "Import de produse din Excel",
-          "Pagini optimizate pentru SEO",
+          "Next.js App Router cu separare între server și client components, route groups pentru site-ul public și zona de admin, rutare pe slug-uri, optimizată SEO",
+          "Schemă PostgreSQL în Supabase (produse, imagini) cu politici RLS, triggere și coloane de tip array pentru atribute cu valori multiple (culoare, dimensiuni, utilizare)",
+          "Sistem de filtrare bazat pe URL (stare partajabilă prin search params), grilă de produse paginată și responsive, drawer de filtre pe mobil și badge-uri pentru filtrele active",
+          "Căutare globală cu debounce și secțiune de produse similare, pe baza atributelor comune",
+          "Dashboard de admin cu autentificare custom prin cookie-uri httpOnly, pentru încărcarea produselor și imaginilor în Supabase Storage",
+          "Formular de contact integrat cu Resend prin server actions, cu validare pentru numere de telefon românești; deploy pe Vercel",
         ],
         challenges: [
           {
-            title: "Import din Excel",
-            text: "Cum ai validat și curățat datele venite din fișiere scrise de mână.",
+            title: "Filtrare pe atribute cu valori multiple",
+            text: "Un produs are mai multe culori, dimensiuni și utilizări, așa că filtrele rulează pe coloane array din PostgreSQL și caută valori care se suprapun.",
           },
           {
-            title: "Imagini rapide",
-            text: "Cum ai optimizat încărcarea imaginilor de produs.",
+            title: "Produse similare relevante",
+            text: "Secțiunea de produse similare ordonează produsele după câte atribute au în comun cu cel curent.",
           },
         ],
         decisions: [
           {
-            title: "Randare pe server pentru catalog",
-            text: "De ce ai ales SSR/SSG pentru paginile publice — ex. SEO și timp de încărcare.",
+            title: "Starea filtrelor în URL",
+            text: "Filtrele ținute în search params fac fiecare căutare partajabilă și salvabilă, iar server components o pot randa direct.",
           },
           {
-            title: "Validare cu Zod la import",
-            text: "Cum ai prins datele greșite din Excel înainte să ajungă în baza de date.",
+            title: "Route groups pentru public și admin",
+            text: "Route groups separate dau site-ului public și zonei de admin layout-uri proprii, fără să schimbe URL-urile.",
           },
         ],
         lessons: "Ce ai învățat din proiect sau ce ai face altfel acum.",
         results: [
-          { value: "800+", label: "produse în catalog" },
-          { value: "0", label: "oferte trimise manual" },
-          { value: "95", label: "scor Lighthouse" },
-        ],
-      },
-      "proiect-3": {
-        name: "Nume proiect",
-        tagline: "O propoziție despre ce face proiectul.",
-        role: "Frontend developer",
-        duration: "1 lună",
-        problem: "Ce problemă rezolvă proiectul și pentru cine.",
-        solution: "Ce ai construit și cum rezolvă problema.",
-        overview:
-          "Descrie aici contextul: pentru cine e aplicația, câți oameni o folosesc, ce era înainte și de ce a fost nevoie de ea.",
-        features: [
-          "Funcționalitate 1",
-          "Funcționalitate 2",
-          "Funcționalitate 3",
-        ],
-        challenges: [
-          {
-            title: "Provocare",
-            text: "O problemă tehnică și cum ai rezolvat-o.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Decizie tehnică",
-            text: "Ce ai ales și de ce, față de alternativa evidentă.",
-          },
-        ],
-        lessons: "Ce ai învățat din proiect sau ce ai face altfel acum.",
-        results: [
-          { value: "—", label: "un rezultat măsurabil" },
-          { value: "—", label: "alt rezultat" },
+          { value: "3", label: "atribute de filtrare cu valori multiple" },
+          { value: "100%", label: "stare a filtrelor partajabilă" },
         ],
       },
     },

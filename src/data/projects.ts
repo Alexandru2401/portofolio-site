@@ -2,7 +2,12 @@ import type { IconType } from "react-icons";
 import { BsTypescript } from "react-icons/bs";
 import { FaCss3, FaHtml5, FaNodeJs, FaReact } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
-import { SiExpress, SiPostgresql, SiSupabase } from "react-icons/si";
+import {
+  SiExpress,
+  SiNextdotjs,
+  SiPostgresql,
+  SiSupabase,
+} from "react-icons/si";
 import financeDashboard from "@/assets/projects/finance-app/cta.png";
 import financeTransactions from "@/assets/projects/finance-app/cta2.png";
 import financeMobile from "@/assets/projects/finance-app/hero.png";
@@ -20,6 +25,7 @@ const tech = {
   html: { name: "HTML", icon: FaHtml5, color: "#E34F26" },
   css: { name: "CSS", icon: FaCss3, color: "#1572B6" },
   react: { name: "React", icon: FaReact, color: "#61DAFB" },
+  next: { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
   tailwind: { name: "Tailwind CSS", icon: RiTailwindCssFill, color: "#38BDF8" },
   typescript: { name: "TypeScript", icon: BsTypescript, color: "#3178C6" },
   node: { name: "Node.js", icon: FaNodeJs, color: "#5FA04E" },
@@ -69,16 +75,9 @@ const projectData: ProjectData[] = [
     images: [financeDashboard, financeTransactions, financeMobile],
   },
   {
-    id: "catalog-produse",
-    year: "2023",
-    tech: [tech.react, tech.typescript, tech.tailwind, tech.node],
-    liveUrl: "#",
-    repoUrl: "#",
-  },
-  {
-    id: "proiect-3",
-    year: "2023",
-    tech: [tech.html, tech.css, tech.react],
+    id: "ceramico",
+    year: "2025",
+    tech: [tech.next, tech.typescript, tech.tailwind, tech.supabase],
     liveUrl: "#",
     repoUrl: "#",
   },

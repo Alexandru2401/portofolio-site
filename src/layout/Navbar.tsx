@@ -19,11 +19,13 @@ const links = [
 // TODO: pune profilul real
 const LINKEDIN_URL = "https://linkedin.com/in/...";
 
+// culorile oficiale LinkedIn
 const linkedinClass =
-  "flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/8 text-sm font-medium text-white transition-colors hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60";
+  "flex items-center justify-center gap-2 rounded-full bg-[#0A66C2] text-sm font-medium text-white transition-colors hover:bg-[#004182] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A66C2]";
 
+// galben ca restul CTA-urilor (Detalii, Contactează-mă) — e acțiunea principală din navbar
 const cvClass =
-  "flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60";
+  "flex items-center gap-2 rounded-full bg-yellow-400 px-4 py-2 text-sm font-semibold text-[#1A1622] shadow-[0_0_24px_-6px_rgb(250_204_21/0.6)] transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400";
 
 const linkClass = (isActive: boolean) =>
   twMerge(

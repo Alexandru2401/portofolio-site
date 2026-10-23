@@ -100,78 +100,51 @@ export const en: Messages = {
           { value: "<1s", label: "dashboard load time" },
         ],
       },
-      "catalog-produse": {
-        name: "Product catalog",
-        tagline: "Public catalog with an admin dashboard for the sales team.",
+      ceramico: {
+        name: "Ceramico",
+        tagline:
+          "Product catalog for a ceramic and tile retailer, with advanced filtering and an admin dashboard.",
         role: "Fullstack developer",
         duration: "3 months",
         problem:
-          "Products were kept in Excel, and customers received offers sent manually by email.",
+          "A ceramic and tile retailer had no online catalog where customers could browse and filter products by color, dimensions or usage.",
         solution:
-          "An online catalog with filters and an admin panel where the team updates products on its own.",
+          "A full-stack catalog with advanced filtering, global search and an admin dashboard where products and images are managed directly.",
         overview:
-          "Describe the context here: who the app is for, how many people use it, what existed before and why it was needed.",
+          "Full-stack product catalog for a ceramic and tile retailer, with advanced filtering, global search and an admin dashboard for managing products.",
         features: [
-          "Search and filters by category, price and stock",
-          "Dashboard for adding and editing products",
-          "Product import from Excel",
-          "SEO-optimized pages",
+          "Built with Next.js App Router, splitting server and client components, with route groups for the public site and the admin area and SEO-friendly slug routing",
+          "Designed a Supabase PostgreSQL schema (products, product images) with RLS policies, triggers and array columns for multi-value attributes (color, dimensions, usage)",
+          "Implemented a URL-driven filtering system (shareable state via search params), paginated responsive product grid, mobile filter drawer and active filter badges",
+          "Built debounced global search and a “similar products” recommendation section based on overlapping product attributes",
+          "Created an admin dashboard with custom httpOnly cookie authentication for uploading products and images to Supabase Storage",
+          "Integrated a contact form with Resend through Next.js server actions, including validation for Romanian phone numbers; deployed on Vercel",
         ],
         challenges: [
           {
-            title: "Excel import",
-            text: "How you validated and cleaned data coming from hand-written files.",
+            title: "Filtering on multi-value attributes",
+            text: "Products have several colors, dimensions and usages at once, so filters run on PostgreSQL array columns and match on overlapping values.",
           },
           {
-            title: "Fast images",
-            text: "How you optimized product image loading.",
+            title: "Relevant similar products",
+            text: "The “similar products” section ranks products by how many attributes they share with the current one.",
           },
         ],
         decisions: [
           {
-            title: "Server rendering for the catalog",
-            text: "Why you chose SSR/SSG for public pages — e.g. SEO and load time.",
+            title: "Filter state in the URL",
+            text: "Keeping filters in search params makes every filtered view shareable and bookmarkable, and lets server components render it directly.",
           },
           {
-            title: "Zod validation on import",
-            text: "How you caught bad Excel data before it reached the database.",
+            title: "Route groups for public and admin",
+            text: "Separate route groups give the public site and the admin area their own layouts without affecting URLs.",
           },
         ],
         lessons:
           "What you learned from the project or what you would do differently now.",
         results: [
-          { value: "800+", label: "products in the catalog" },
-          { value: "0", label: "offers sent manually" },
-          { value: "95", label: "Lighthouse score" },
-        ],
-      },
-      "proiect-3": {
-        name: "Project name",
-        tagline: "One sentence about what the project does.",
-        role: "Frontend developer",
-        duration: "1 month",
-        problem: "What problem the project solves and for whom.",
-        solution: "What you built and how it solves the problem.",
-        overview:
-          "Describe the context here: who the app is for, how many people use it, what existed before and why it was needed.",
-        features: ["Feature 1", "Feature 2", "Feature 3"],
-        challenges: [
-          {
-            title: "Challenge",
-            text: "A technical problem and how you solved it.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Technical decision",
-            text: "What you chose and why, compared to the obvious alternative.",
-          },
-        ],
-        lessons:
-          "What you learned from the project or what you would do differently now.",
-        results: [
-          { value: "—", label: "a measurable result" },
-          { value: "—", label: "another result" },
+          { value: "3", label: "multi-value filter attributes" },
+          { value: "100%", label: "shareable filter state" },
         ],
       },
     },
