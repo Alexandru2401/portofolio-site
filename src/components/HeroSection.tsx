@@ -39,7 +39,7 @@ export default function HeroSection() {
 
       {/* min-h = înălțimea vizibilă a hero-ului (înainte min-h-svh într-o secțiune tăiată la 90dvh
           împingea conținutul sub centru); pt-24 lasă loc navbar-ului fix */}
-      <div className="relative z-10 mx-auto flex min-h-[90dvh] w-[min(64rem,90%)] items-center pt-24 pb-16">
+      <div className="relative z-10 section-container flex min-h-[90dvh] items-center pt-24 pb-16">
         <div className="grid w-full items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-16">
           {/* stânga — textul; umbra îl desparte de liniile albe din Lightfall */}
           <div className="relative isolate [text-shadow:0_0_24px_rgb(47_41_58/0.9),0_2px_6px_rgb(0_0_0/0.5)]">

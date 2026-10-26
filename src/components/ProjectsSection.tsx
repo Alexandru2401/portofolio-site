@@ -13,7 +13,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative mx-auto flex w-full flex-col gap-10 px-4 pt-10 md:max-w-10/12 md:px-0"
+      className="section-container relative flex flex-col gap-10 px-2 pt-10 md:px-0"
     >
       <RailPath
         d={verticalPath}

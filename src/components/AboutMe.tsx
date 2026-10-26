@@ -84,12 +84,12 @@ export default function AboutMe() {
   const { about } = useMessages();
   return (
     <section id="about-me" className="text-white">
-      <div className="relative h-32">
+      <div className="relative h-16 md:h-20">
         <RailPath d={verticalPath} className="top-0 left-1/2 h-full w-px -translate-x-1/2" />
       </div>
 
       {/* aici bara se bifurcă și înconjoară secțiunea ca un border */}
-      <div className="relative mx-auto w-[min(76rem,94%)] px-6 pt-16 pb-16 md:px-12 md:pb-36">
+      <div className="section-container relative px-6 pt-16 pb-20 md:px-12 md:pb-40">
         <RailPath d={borderPaths} className="top-0 left-0 size-full" />
         <RailCheckpoint
           href="#about-me"
@@ -97,11 +97,11 @@ export default function AboutMe() {
           className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
         />
 
-        <h2 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center font-semibold leading-[0.9] tracking-tighter text-balance lg:whitespace-nowrap">
+        <h2 className="section-title">
           {t("about.title")}
         </h2>
 
-        <div className="mt-8 grid items-center gap-8 md:grid-cols-[1fr_1.05fr] [&>*]:min-w-0">
+        <div className="mt-12 grid items-center gap-8 md:mt-16 md:grid-cols-[1fr_1.05fr] [&>*]:min-w-0">
           {/* povestea — text direct pe fundal, fără card, ca să contrasteze cu fereastra de cod */}
           <div>
             <div className="flex items-start gap-5">
@@ -226,7 +226,7 @@ export default function AboutMe() {
         </div>
       </div>
 
-      <div className="h-14 relative md:h-32">
+      <div className="relative h-10 md:h-16">
         <RailPath d={verticalPath} className="top-0 left-1/2 h-full w-px -translate-x-1/2" />
       </div>
     </section>

@@ -213,9 +213,7 @@ export const en: Messages = {
   },
 
   stack: {
-    title: "Tech stack",
-    subtitle:
-      "A complete product has layers: design, frontend, API, deploy. Below are the tools I use for each one — pick a layer on the left to see its technologies.",
+    title: "Tools for every layer",
     layers: {
       frontend: {
         title: "Frontend",

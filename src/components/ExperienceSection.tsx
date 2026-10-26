@@ -3,7 +3,12 @@ import RailCheckpoint from "./rail/RailCheckpoint";
 import RailPath from "./rail/RailPath";
 import { useTranslation } from "react-i18next";
 import { useJobs } from "@/data/experience";
-import { LEFT_RAIL_X, railActive, type PathBuilder } from "@/lib/rail";
+import {
+  LEFT_RAIL_X,
+  railActive,
+  roundCorners,
+  type PathBuilder,
+} from "@/lib/rail";
 
 // centrul checkpoint-ului (top-20) și locul unde bara cotește, sub el
 const CHECKPOINT_Y = 40;
@@ -12,7 +17,7 @@ const TURN_Y = CHECKPOINT_Y + 40;
 // vine din mijloc (de la Despre mine), trece prin checkpoint, abia apoi cotește
 // spre stânga și coboară pe stânga până la Stack, care o preia de acolo
 const experiencePath: PathBuilder = (w, h) => [
-  `M${w / 2} 0 V${TURN_Y} H${LEFT_RAIL_X} V${h}`,
+  roundCorners(`M${w / 2} 0 V${TURN_Y} H${LEFT_RAIL_X} V${h}`),
 ];
 
 const initials = (name: string) =>
@@ -28,7 +33,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] pt-36 pb-24 text-white"
+      className="section-container relative pt-28 pb-24 text-white md:pb-32"
     >
       <RailPath d={experiencePath} className="top-0 left-0 size-full" />
       <RailCheckpoint
@@ -37,17 +42,17 @@ export default function ExperienceSection() {
         className="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2"
       />
 
-      <header className="max-w-5xl pl-8 md:pl-16">
-        <h2 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center font-semibold leading-[0.9] tracking-tighter">
+      <header className="px-8 md:px-16">
+        <h2 className="section-title">
           {t("experience.title")}
         </h2>
 
-        <p className="mt-6 text-pretty text-center text-white/80">
+        <p className="section-subtitle">
           {t("experience.subtitle")}
         </p>
       </header>
 
-      <ol className="mt-16 flex flex-col gap-20">
+      <ol className="mt-12 flex md:mt-16 flex-col gap-20">
         {jobs.map((job) => (
           // data-active e pus de railActive când bara ajunge la job
           <li

@@ -7,6 +7,7 @@ import {
   isMobileRail,
   LEFT_RAIL_X,
   rightRailX,
+  roundCorners,
   type PathBuilder,
 } from "@/lib/rail";
 
@@ -30,7 +31,9 @@ const socials = [
 // bara pleacă de pe stânga (de la Stack; pe mobil de pe dreapta) și se
 // întoarce la mijloc, unde se termină
 const contactPath: PathBuilder = (w, h) => [
-  `M${isMobileRail() ? rightRailX(w) : LEFT_RAIL_X} 0 V40 H${w / 2} V${h}`,
+  roundCorners(
+    `M${isMobileRail() ? rightRailX(w) : LEFT_RAIL_X} 0 V40 H${w / 2} V${h}`,
+  ),
 ];
 
 export default function ContactSection() {
@@ -40,7 +43,7 @@ export default function ContactSection() {
       id="contact"
       className="relative overflow-hidden border-t border-white/10 text-white"
     >
-      <div className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] px-4 pt-36 pb-16 md:px-0 md:pt-44 md:pb-28">
+      <div className="section-container relative px-4 pt-40 pb-12 md:px-0 md:pb-16">
         <RailPath d={contactPath} className="top-0 left-0 h-24 w-full" />
         <RailCheckpoint
           href="#contact"
@@ -53,15 +56,15 @@ export default function ContactSection() {
         </p>
 
         {/* titlu și subtitlu ca la celelalte secțiuni */}
-        <h2 className="mt-5 text-center text-[clamp(1.75rem,5vw,4.5rem)] font-semibold leading-[0.9] tracking-tighter text-balance">
+        <h2 className="section-title mt-5">
           {t("contact.title")}
         </h2>
 
-        <p className="mx-auto mt-6 max-w-md text-center text-pretty text-white/60">
+        <p className="section-subtitle text-balance">
           {t("contact.text")}
         </p>
 
-        <ul className="mt-6 flex flex-wrap justify-center gap-3">
+        <ul className="mt-8 flex flex-wrap justify-center gap-3">
           {socials.map(({ href, label, icon: Icon, className }) => (
             <li key={label}>
               <a

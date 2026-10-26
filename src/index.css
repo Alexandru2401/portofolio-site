@@ -184,3 +184,17 @@
     }
   }
 }
+
+/* layout și tipografie comune pentru secțiunile din Home */
+@utility section-container {
+  @apply mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)];
+}
+
+/* h2 de secțiune: un pas sub h1-ul din hero */
+@utility section-title {
+  @apply text-center text-[clamp(1.875rem,4vw,3rem)] leading-[1.1] font-semibold tracking-tight text-balance;
+}
+
+@utility section-subtitle {
+  @apply mx-auto mt-4 max-w-xl text-center text-base leading-relaxed text-pretty text-white/60 md:text-lg;
+}

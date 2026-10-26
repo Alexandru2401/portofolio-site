@@ -9,6 +9,7 @@ import {
   LEFT_RAIL_X,
   railActive,
   rightRailX,
+  roundCorners,
   type PathBuilder,
 } from "@/lib/rail";
 
@@ -20,8 +21,10 @@ const MOBILE_CHECKPOINT_Y = 2;
 const stackPath: PathBuilder = (w, h) =>
   isMobileRail()
     ? [
+      roundCorners(
         `M${LEFT_RAIL_X} 0 V${MOBILE_CHECKPOINT_Y} H${rightRailX(w)} V${h}`,
-      ]
+      ),
+    ]
     : [`M${LEFT_RAIL_X} 0 V${h}`];
 
 export default function Technologies() {
@@ -44,7 +47,7 @@ export default function Technologies() {
   return (
     <section
       id="stack"
-      className="relative mx-auto w-[calc(100%-1rem)] md:w-[min(72rem,90%)] pt-22 md:pt-20 pb-10 md:pb-20 text-white"
+      className="section-container relative pt-16 pb-16 text-white md:pt-24 md:pb-24"
     >
       <RailPath d={stackPath} className="top-0 left-0 size-full" />
       <RailCheckpoint
@@ -53,20 +56,16 @@ export default function Technologies() {
         className="absolute -top-5 left-1/2 -translate-x-1/2 md:top-2 md:-left-10 md:translate-x-0"
       />
 
-      <header className="max-w-5xl px-8 md:pr-0 md:pl-16">
-        <h1 className="text-[clamp(1.75rem,5vw,4.5rem)] text-center  font-semibold leading-[0.9] tracking-tighter">
+      <header className="px-8 md:px-16">
+        <h2 className="section-title">
           {t("stack.title")}
-        </h1>
-
-        <p className="mt-4 text-center text-sm text-pretty text-white/60 md:mt-6 md:text-base">
-          {t("stack.subtitle")}
-        </p>
+        </h2>
       </header>
 
       {/* data-active e pus de railActive când bara ajunge la secțiune */}
       <div
         ref={railActive(60)}
-        className="group relative mt-12 grid gap-6 pr-8 md:mt-24 md:grid-cols-[15rem_1fr] md:gap-8 md:pr-0 md:pl-16"
+        className="group relative mt-12 grid gap-6 pr-8 md:mt-16 md:grid-cols-[15rem_1fr] md:gap-8 md:pr-0 md:pl-16"
       >
         {/* nodul de pe linie (pe dreapta pe mobil) */}
         <span
@@ -98,11 +97,10 @@ export default function Technologies() {
                 aria-controls="stack-panel"
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActiveId(layer.id)}
-                className={`flex shrink-0 cursor-pointer items-baseline gap-3 rounded-md px-4 py-3 text-left ring-1 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-yellow-400 ${
-                  selected
+                className={`flex shrink-0 cursor-pointer items-baseline gap-3 rounded-md px-4 py-3 text-left ring-1 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-yellow-400 ${selected
                     ? "bg-[#2F293A] ring-yellow-400/70 shadow-[0_0_40px_-12px_rgb(250_204_21/0.55)]"
                     : "bg-white/5 ring-white/20 text-white/85 hover:bg-white/10 hover:text-white hover:ring-white/40"
-                }`}
+                  }`}
               >
                 <span className="text-xs font-medium tracking-[0.25em] text-yellow-400 tabular-nums">
                   {String(i + 1).padStart(2, "0")}
